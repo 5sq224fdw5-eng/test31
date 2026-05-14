@@ -483,20 +483,25 @@ async function gamePush(p,d){try{const r=await fetch(`${GAME_DB}/${p}.json`,{met
 // ── LOGIN ──
 // ══════════════════════════════════════════════
 async function doLogin(role){
-  if(role==='admin'){
-    if(document.getElementById('loginPw').value!=='admin1234'){showToast('비밀번호 오류');return;}
-    CU={name:'관리자',role:'admin',key:null};
-  }else{
-    const name=document.getElementById('loginName').value.trim();
-    if(!name){showToast('이름을 입력하세요');return;}
-    const mems=await dbGet('members');
-    if(!mems){showToast('멤버 정보를 불러올 수 없습니다');return;}
-    const entry=Object.entries(mems).find(([k,m])=>m.name===name);
-    if(!entry){showToast('등록되지 않은 이름입니다');return;}
-    CU={name,role:'member',key:entry[0]};
+  try{
+    if(role==='admin'){
+      if(document.getElementById('loginPw').value!=='admin1234'){showToast('비밀번호 오류');return;}
+      CU={name:'관리자',role:'admin',key:null};
+    }else{
+      const name=document.getElementById('loginName').value.trim();
+      if(!name){showToast('이름을 입력하세요');return;}
+      const mems=await dbGet('members');
+      if(!mems){showToast('멤버 정보를 불러올 수 없습니다');return;}
+      const entry=Object.entries(mems).find(([k,m])=>m.name===name);
+      if(!entry){showToast('등록되지 않은 이름입니다');return;}
+      CU={name,role:'member',key:entry[0]};
+    }
+    localStorage.setItem('crew31User',JSON.stringify(CU));
+    await enterApp();
+  }catch(e){
+    console.error('login error',e);
+    showToast('오류가 발생했습니다: '+e.message);
   }
-  localStorage.setItem('crew31User',JSON.stringify(CU));
-  await enterApp();
 }
 
 function logout(){
@@ -520,11 +525,8 @@ async function enterApp(){
   document.getElementById('adminMenu').style.display=CU.role==='admin'?'block':'none';
 
   calY=new Date().getFullYear();calM=new Date().getMonth();calSel=todayStr;
-  await loadGroups();
-  goTab('notice');
-
-  // 자동 로그인 복원
-  const saved=localStorage.getItem('crew31User');
+  try{await loadGroups();}catch(e){console.error('loadGroups error',e);}
+  try{goTab('notice');}catch(e){console.error('goTab error',e);}
 }
 
 // ── 자동 로그인 ──
@@ -594,6 +596,7 @@ function goTab(tab){
   renderDeptSubMenu();
 
   const mb=document.getElementById('mainBody');
+  if(!mb)return;
   mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
 
   const headers={
