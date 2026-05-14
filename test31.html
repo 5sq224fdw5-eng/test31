@@ -621,8 +621,8 @@ function renderVoteCard(title,vlist,links){
   }
   html+=`</div>`;
 
-  // ── 그룹 버튼들 ──
-  html+=`<div style="padding:4px 14px 12px;display:flex;gap:8px;flex-wrap:wrap">`;
+  // ── 그룹 버튼들 (가로 스크롤, 한 줄) ──
+  html+=`<div style="padding:4px 14px 12px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;">`;
   vlist.forEach(([vid,v])=>{
     const gColor=groups[v.groupId]?.color||'#FF7F6E';
     const gName=groups[v.groupId]?.name||'';
@@ -633,12 +633,25 @@ function renderVoteCard(title,vlist,links){
     const isExpanded=_expandedFeedGroup===vid;
     const voterCnt=v.responses?Object.keys(v.responses).length:0;
     const locked=gLock&&CU?.role!=='admin'&&!sessionStorage.getItem('unlockedGroup_'+v.groupId);
+    // 마감 여부로 버튼 비활성화
+    const vDeadline=new Date(v.deadline);
+    const vClosed=v.closed||vDeadline<=new Date();
 
-    html+=`<button onclick="toggleFeedGroup('${vid}')" style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExpanded?gColor:'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExpanded?gColor+'10':'white'};color:${voted||isExpanded?gColor:'#8C6458'};font-size:14px;font-weight:800;cursor:pointer;transition:all 0.15s;">`;
+    html+=`<button onclick="toggleFeedGroup('${vid}')" style="
+      flex:none;display:flex;align-items:center;gap:5px;
+      padding:9px 18px;border-radius:22px;
+      border:2px solid ${voted?gColor:isExpanded?gColor:vClosed?'rgba(200,180,175,0.2)':'rgba(200,180,175,0.35)'};
+      background:${voted?gColor+'15':isExpanded?gColor+'10':vClosed?'rgba(240,235,233,0.6)':'white'};
+      color:${voted?gColor:isExpanded?gColor:vClosed?'#C4A098':'#5C3D35'};
+      font-size:14px;font-weight:800;cursor:${vClosed&&!voted?'default':'pointer'};
+      transition:all 0.15s;white-space:nowrap;
+      ${vClosed&&!voted?'opacity:0.5':''}
+    ">`;
     if(voted)html+=`✅ `;
     else if(locked)html+=`🔒 `;
+    else if(vClosed)html+=`🔒 `;
     html+=escH(gName);
-    if(voterCnt>0)html+=` <span style="font-size:12px;opacity:0.7">${voterCnt}</span>`;
+    if(voterCnt>0)html+=` <span style="font-size:11px;opacity:0.65;margin-left:2px">${voterCnt}명</span>`;
     html+=`</button>`;
   });
   html+=`</div>`;
