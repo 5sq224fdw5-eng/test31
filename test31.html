@@ -658,7 +658,7 @@ function renderNoticeCard(nid,n,allComments){
   const commentList=comments?Object.values(comments).sort((a,b)=>(a.time||0)-(b.time||0)):[];
   const isExpanded=_expandedNotice===nid;
   const body=n.body||'';
-  const preview=body.length>80?body.slice(0,80)+'…':body;
+  const preview=body.length>80?body.slice(0,80)+'...':body;
 
   let html=`<div class="feed-card">`;
   html+=`<div class="feed-card-header">`;
@@ -913,11 +913,9 @@ function loadChatTab(){
       html+=`<div style="padding:10px 14px 12px;border-top:1px solid var(--border);background:white;display:flex;gap:8px;align-items:flex-end">`;
       html+=`<textarea id="chatInput" rows="1" placeholder="메시지 입력..." onkeydown="chatKeydown(event)" oninput="autoResize(this)" style="flex:1;border:1.5px solid var(--border);border-radius:18px;padding:9px 14px;font-size:14px;font-family:inherit;resize:none;outline:none;max-height:80px;line-height:1.5;background:var(--cream)"></textarea>`;
 
-```
-  html+=`<button onclick="sendChat()" style="width:40px;height:40px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border:none;border-radius:50%;color:white;font-size:17px;flex-shrink:0;box-shadow:0 3px 10px rgba(255,127,110,0.3)">➤</button>`;
-  html+=`</div>`;
+html+=`<button onclick="sendChat()" style="width:40px;height:40px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border:none;border-radius:50%;color:white;font-size:17px;flex-shrink:0;box-shadow:0 3px 10px rgba(255,127,110,0.3)">➤</button>`;
+html+=`</div>`;
 }
-```
 
 }
 html+=`</div></div>`;
@@ -1029,21 +1027,18 @@ const timeStr=d.toLocaleTimeString(‘ko-KR’,{hour:‘2-digit’,minute:‘2-d
 if(dateStr!==lastDate){html+=`<div class="msg-date-sep">${dateStr}</div>`;lastDate=dateStr;}
 const avColor=m.senderRole===‘admin’?‘linear-gradient(135deg,#FFB347,#FF9F7A)’:‘linear-gradient(135deg,#FF9F7A,#FF7F6E)’;
 
-```
 html+=`<div class="msg-row ${isMe?'me':''}" id="msg_${mid}">`;
 if(!isMe)html+=`<div class="msg-avatar" style="background:${avColor};cursor:default">${(m.senderName||'?')[0]}</div>`;
 html+=`<div class="msg-content">`;
 if(!isMe)html+=`<div class="msg-name">${escH(m.senderName||'')}${m.senderRole==='admin'?' 👑':''}</div>`;
 // 롱프레스 / 우클릭으로 메뉴
-html+=`<div class="msg-bubble ${isMe?'me':'other'}"
-  oncontextmenu="event.preventDefault();showMsgMenu('${mid}',event.clientX,event.clientY)"
-  ontouchstart="_pressTimer=setTimeout(()=>showMsgMenu('${mid}',event.touches[0].clientX,event.touches[0].clientY),600)"
-  ontouchend="clearTimeout(_pressTimer)"
-  ontouchmove="clearTimeout(_pressTimer)"
->${escH(m.body||'')}</div>`;
-html+=`<div class="msg-time">${timeStr}</div>`;
-html+=`</div></div>`;
-```
+html+=`<div class=“msg-bubble ${isMe?‘me’:‘other’}”
+oncontextmenu=“event.preventDefault();showMsgMenu(’${mid}’,event.clientX,event.clientY)”
+ontouchstart=”_pressTimer=setTimeout(()=>showMsgMenu(’${mid}’,event.touches[0].clientX,event.touches[0].clientY),600)”
+ontouchend=“clearTimeout(_pressTimer)”
+ontouchmove=“clearTimeout(_pressTimer)”
+
+> ${escH(m.body||’’)}</div>`; html+=`<div class="msg-time">${timeStr}</div>`; html+=`</div></div>`;
 
 });
 el.innerHTML=html;
@@ -1327,7 +1322,6 @@ const ddStr=deadline.toLocaleDateString(‘ko-KR’,{month:‘numeric’,day:‘
 const totalP=vlist.reduce((s,[vid,v])=>s+(v.responses?Object.keys(v.responses).length:0),0);
 const repVid=vlist[0][0];
 
-```
 html+=`<div class="feed-card">`;
 html+=`<div class="feed-card-header">`;
 html+=`<div class="feed-card-icon" style="background:linear-gradient(135deg,#FF9F7A,#FF7F6E)">📋</div>`;
@@ -1340,55 +1334,55 @@ html+=`</div>`;
 // 부서 버튼들 (가로 스크롤)
 html+=`<div style="padding:8px 14px 12px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">`;
 vlist.forEach(([vid,v])=>{
-  const gColor=groups[v.groupId]?.color||'#FF7F6E';
-  const gName=groups[v.groupId]?.name||'';
-  const _ov=_optimisticVotes[vid];
-  const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-  const voted=myVote!==null;
-  const isExp=_expandedFeedGroupHome===vid;
-  const vClosed=v.closed||new Date(v.deadline)<=new Date();
-  const voterCnt=v.responses?Object.keys(v.responses).length:0;
-  html+=`<button onclick="toggleHomeFeedGroup('${vid}')" style="flex:none;display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExp?gColor:vClosed?'rgba(200,180,175,0.2)':'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExp?gColor+'10':vClosed?'rgba(240,235,233,0.5)':'white'};color:${voted?gColor:isExp?gColor:vClosed?'var(--text3)':'var(--text2)'};font-size:13px;font-weight:800;cursor:${vClosed&&!voted?'default':'pointer'};white-space:nowrap;${vClosed&&!voted?'opacity:0.5':''}">`;
-  if(voted)html+=`✅ `;
-  html+=escH(gName);
-  if(voterCnt>0)html+=` <span style="font-size:11px;opacity:0.7">${voterCnt}명</span>`;
-  html+=`</button>`;
+const gColor=groups[v.groupId]?.color||’#FF7F6E’;
+const gName=groups[v.groupId]?.name||’’;
+const _ov=_optimisticVotes[vid];
+const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+const voted=myVote!==null;
+const isExp=_expandedFeedGroupHome===vid;
+const vClosed=v.closed||new Date(v.deadline)<=new Date();
+const voterCnt=v.responses?Object.keys(v.responses).length:0;
+html+=`<button onclick="toggleHomeFeedGroup('${vid}')" style="flex:none;display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExp?gColor:vClosed?'rgba(200,180,175,0.2)':'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExp?gColor+'10':vClosed?'rgba(240,235,233,0.5)':'white'};color:${voted?gColor:isExp?gColor:vClosed?'var(--text3)':'var(--text2)'};font-size:13px;font-weight:800;cursor:${vClosed&&!voted?'default':'pointer'};white-space:nowrap;${vClosed&&!voted?'opacity:0.5':''}">`;
+if(voted)html+=`✅ `;
+html+=escH(gName);
+if(voterCnt>0)html+=` <span style="font-size:11px;opacity:0.7">${voterCnt}명</span>`;
+html+=`</button>`;
 });
 html+=`</div>`;
 
 // 펼쳐진 투표
 vlist.forEach(([vid,v])=>{
-  if(_expandedFeedGroupHome!==vid)return;
-  const gColor=groups[v.groupId]?.color||'#FF7F6E';
-  const gName=groups[v.groupId]?.name||'';
-  const vClosed=v.closed||new Date(v.deadline)<=new Date();
-  const _ov=_optimisticVotes[vid];
-  const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-  const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
-  const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
+if(_expandedFeedGroupHome!==vid)return;
+const gColor=groups[v.groupId]?.color||’#FF7F6E’;
+const gName=groups[v.groupId]?.name||’’;
+const vClosed=v.closed||new Date(v.deadline)<=new Date();
+const _ov=_optimisticVotes[vid];
+const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
+const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
 
-  html+=`<div style="margin:0 10px 12px;background:rgba(255,248,245,0.9);border-radius:14px;border:2px solid ${gColor}30;overflow:hidden">`;
-  html+=`<div style="padding:8px 12px 4px;font-size:12px;font-weight:800;color:${gColor}">${escH(gName)}</div>`;
-  (v.options||[]).forEach((opt,i)=>{
-    let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
-    if(isOptimistic&&myVote===i)cnt++;
-    const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
-    const isSel=myVote===i;
-    const canVote=!vClosed&&CU?.role==='member'&&myVote===null;
-    html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}" style="margin:4px 8px;border-radius:10px" ${canVote?`onclick="castVoteInFeed('${vid}',${i})"`:''}> `;
-    if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}15"></div>`;
-    html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
-    html+=`<div class="vopt-label">${escH(opt)}</div>`;
-    if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
-    html+=`</div>`;
-  });
-  if(myVote!==null){
-    const optName=(v.options||[])[myVote]||'';
-    html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px 8px"><div class="voted-badge" style="flex:1">✅ ${escH(optName)}</div>`;
-    if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVoteFeed('${vid}')">수정</button>`;
-    html+=`</div>`;
-  }
-  html+=`</div>`;
+html+=`<div style="margin:0 10px 12px;background:rgba(255,248,245,0.9);border-radius:14px;border:2px solid ${gColor}30;overflow:hidden">`;
+html+=`<div style="padding:8px 12px 4px;font-size:12px;font-weight:800;color:${gColor}">${escH(gName)}</div>`;
+(v.options||[]).forEach((opt,i)=>{
+let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
+if(isOptimistic&&myVote===i)cnt++;
+const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
+const isSel=myVote===i;
+const canVote=!vClosed&&CU?.role===‘member’&&myVote===null;
+html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}" style="margin:4px 8px;border-radius:10px" ${canVote?`onclick=“castVoteInFeed(’${vid}’,${i})”`:''}> `;
+if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}15"></div>`;
+html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
+html+=`<div class="vopt-label">${escH(opt)}</div>`;
+if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
+html+=`</div>`;
+});
+if(myVote!==null){
+const optName=(v.options||[])[myVote]||’’;
+html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px 8px"><div class="voted-badge" style="flex:1">✅ ${escH(optName)}</div>`;
+if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVoteFeed('${vid}')">수정</button>`;
+html+=`</div>`;
+}
+html+=`</div>`;
 });
 
 // 하단 액션바
@@ -1397,7 +1391,6 @@ html+=`<a href="https://5sq224fdw5-eng.github.io/game31/game.html" target="_blan
 html+=`<button class="feed-footer-btn" style="color:var(--accent)" onclick="goTab('notice')">📢 공지</button>`;
 html+=`</div>`;
 html+=`</div>`;
-```
 
 });
 html+=’</div>’;
@@ -1433,10 +1426,10 @@ delete _optimisticVotes[vid];loadHome();
 }
 
 function toggleHomeFeedGroup(vid){
-const v=*cachedHomeData.votes?.[vid];
+const v=_cachedHomeData.votes?.[vid];
 if(!v)return;
 const gid=v.groupId;
-if(CU?.role!==‘admin’&&groups[gid]?.lock&&!sessionStorage.getItem(’unlockedGroup*’+gid)){
+if(CU?.role!==‘admin’&&groups[gid]?.lock&&!sessionStorage.getItem(‘unlockedGroup*’+gid)){
 _pendingFeedVid=vid;
 openGroupLockModal(gid,‘enter’);
 return;
@@ -1611,9 +1604,9 @@ if(g?.lock!==pw){showToast(‘비밀번호가 틀렸습니다’);return;}
 await dbSet(`groups/${gid}/lock`,null);
 groups[gid]={…groups[gid],lock:null};
 showToast(‘🔓 잠금 해제됨’);closeGroupLockModal();renderDeptSubMenu();
-}else if(_lockAction===‘enter’||*lockAction===‘chatenter’){
+}else if(_lockAction===‘enter’||_lockAction===‘chatenter’){
 if(g?.lock!==pw){showToast(‘비밀번호가 틀렸습니다’);return;}
-sessionStorage.setItem(’unlockedGroup*’+gid,‘1’);
+sessionStorage.setItem(‘unlockedGroup*’+gid,‘1’);
 closeGroupLockModal();
 if(_lockAction===‘chatenter’){openChatRoom(‘dept’,gid,groups[gid]?.name+’ 채팅’);}
 else if(_pendingDept===gid){_pendingDept=null;goDept(gid);}
@@ -1783,7 +1776,6 @@ const vLinks=links?.[vid]?Object.values(links[vid]):[];
 const linkedCount=vLinks.length;
 const isClosed=v.closed||new Date(v.deadline)<=new Date();
 
-```
 html+=`<div class="card">`;
 html+=`<div style="padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px">`;
 html+=`<span style="background:${gColor}22;color:${gColor};font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px">${escH(gName)}</span>`;
@@ -1798,33 +1790,32 @@ html+=`</div>`;
 
 // 투표 결과
 if(v.responses&&Object.keys(v.responses).length>0){
-  const totalR=Object.values(v.responses).length;
-  html+=`<div style="padding:0 14px 10px">`;
-  (v.options||[]).forEach((opt,i)=>{
-    const cnt=Object.values(v.responses).filter(r=>r===i).length;
-    const pct=totalR>0?Math.round(cnt/totalR*100):0;
-    html+=`<div style="margin-bottom:4px">`;
-    html+=`<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${escH(opt)}</span><span style="font-weight:700">${cnt}명 (${pct}%)</span></div>`;
-    html+=`<div style="height:6px;background:var(--surface2);border-radius:3px"><div style="height:100%;background:${gColor};border-radius:3px;width:${pct}%"></div></div>`;
-    html+=`</div>`;
-  });
-  html+=`</div>`;
+const totalR=Object.values(v.responses).length;
+html+=`<div style="padding:0 14px 10px">`;
+(v.options||[]).forEach((opt,i)=>{
+const cnt=Object.values(v.responses).filter(r=>r===i).length;
+const pct=totalR>0?Math.round(cnt/totalR*100):0;
+html+=`<div style="margin-bottom:4px">`;
+html+=`<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${escH(opt)}</span><span style="font-weight:700">${cnt}명 (${pct}%)</span></div>`;
+html+=`<div style="height:6px;background:var(--surface2);border-radius:3px"><div style="height:100%;background:${gColor};border-radius:3px;width:${pct}%"></div></div>`;
+html+=`</div>`;
+});
+html+=`</div>`;
 }
 
 // 링크 제출자
 if(vLinks.length>0){
-  html+=`<div style="padding:6px 14px 10px;border-top:1px solid var(--border)">`;
-  html+=`<div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px">📎 링크 제출 (${vLinks.length}건)</div>`;
-  vLinks.forEach((l,idx)=>{
-    html+=`<div style="display:flex;gap:6px;align-items:center;padding:3px 0">`;
-    html+=`<span style="font-size:12px;font-weight:700;color:var(--text2)">${idx+1}. ${escH(l.nick||'')}</span>`;
-    html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:var(--blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escH(l.url)}</a>`;
-    html+=`</div>`;
-  });
-  html+=`</div>`;
+html+=`<div style="padding:6px 14px 10px;border-top:1px solid var(--border)">`;
+html+=`<div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px">📎 링크 제출 (${vLinks.length}건)</div>`;
+vLinks.forEach((l,idx)=>{
+html+=`<div style="display:flex;gap:6px;align-items:center;padding:3px 0">`;
+html+=`<span style="font-size:12px;font-weight:700;color:var(--text2)">${idx+1}. ${escH(l.nick||'')}</span>`;
+html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:var(--blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escH(l.url)}</a>`;
+html+=`</div>`;
+});
+html+=`</div>`;
 }
 html+=`</div>`;
-```
 
 });
 html+=’</div>’;
