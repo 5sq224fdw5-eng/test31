@@ -530,31 +530,24 @@ let _cachedHomeData={votes:null,links:null};
 // 카드만 다시 그리기 (Firebase 재요청 없음)
 function renderVoteCards(){
   const el=document.getElementById('homeContent');
-  if(!el||!_cachedHomeData.votes)return;
-  renderFeedHTML(el,_cachedHomeData.votes,_cachedHomeData.links);
+  if(!el)return;
+  renderFeedHTML(el,_cachedHomeData.votes,_cachedHomeData.links,_cachedHomeData.notices);
 }
 
 async function loadHome(){
   const el=document.getElementById('homeContent');
   el.innerHTML='<div class="loading"><div class="spinner"></div></div>';
-  const [votes,links]=await Promise.all([dbGet('votes'),dbGet('links')]);
-  _cachedHomeData={votes,links};
-  renderFeedHTML(el,votes,links);
+  const [votes,links,notices,noticeComments]=await Promise.all([dbGet('votes'),dbGet('links'),dbGet('notices'),dbGet('noticeComments')]);
+  _cachedHomeData={votes,links,notices,noticeComments};
+  renderFeedHTML(el,votes,links,notices);
 }
 
-function renderFeedHTML(el,votes,links){
-  if(!votes){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>';return;}
+function renderFeedHTML(el,votes,links,notices){
+  // 투표 카드 + 공지 카드를 시간순으로 합쳐서 피드로 렌더링
+  const allVotes=votes?Object.entries(votes).filter(([k,v])=>!v.deleted):[];
+  const allNotices=notices?Object.entries(notices).filter(([k,n])=>!n.deleted&&n.pinned):[];
 
-  // 제목 기준으로 그룹핑 (같은 날 투표들을 하나의 피드 카드로)
-  // 날짜+제목 패턴으로 묶기: "5월 14일 출근 투표" 같은 제목이 그룹별로 따로 있을 수 있음
-  // → 제목이 같은 것끼리 묶고, 다르면 별도 카드
-  const allVotes=Object.entries(votes)
-    .filter(([k,v])=>!v.deleted)
-    .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-
-  if(allVotes.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>';return;}
-
-  // 제목으로 그룹핑
+  // 투표: 제목별 그룹핑
   const byTitle={};
   allVotes.forEach(([vid,v])=>{
     const t=v.title||'';
@@ -562,166 +555,250 @@ function renderFeedHTML(el,votes,links){
     byTitle[t].push([vid,v]);
   });
 
+  // 피드 아이템: 투표묶음 + 공지 합치기 (시간 내림차순)
+  const feedItems=[];
+  Object.entries(byTitle).forEach(([title,vlist])=>{
+    const t=Math.max(...vlist.map(([,v])=>v.createdAt||0));
+    feedItems.push({type:'vote',title,vlist,time:t});
+  });
+  allNotices.forEach(([nid,n])=>{
+    feedItems.push({type:'notice',nid,n,time:n.createdAt||0});
+  });
+  feedItems.sort((a,b)=>b.time-a.time);
+
+  if(feedItems.length===0){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📭</div>아직 올라온 내용이 없어요</div>';
+    return;
+  }
+
   let html='<div style="padding:12px 0 80px">';
 
-  Object.entries(byTitle).forEach(([title,vlist])=>{
-    // 대표 마감시간
-    const deadline=new Date(vlist[0][1].deadline);
-    const isClosed=vlist.every(([vid,v])=>v.closed||new Date(v.deadline)<=new Date());
-    const diffH=Math.floor((deadline-new Date())/3600000);
-    const ddStr=deadline.toLocaleDateString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
-    const totalParticipants=vlist.reduce((s,[vid,v])=>s+(v.responses?Object.keys(v.responses).length:0),0);
-
-    // 내가 이미 투표한 그룹 확인
-    const myVotedGroups=vlist.filter(([vid,v])=>{
-      const _ov=_optimisticVotes[vid];
-      const mv=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-      return mv!==null;
-    });
-
-    // 피드 카드
-    html+=`<div style="background:white;border-radius:20px;margin:0 14px 16px;box-shadow:0 2px 20px rgba(255,127,110,0.12);border:1px solid rgba(255,210,200,0.5);overflow:hidden">`;
-
-    // 카드 헤더
-    html+=`<div style="padding:16px 16px 12px;border-bottom:1px solid rgba(255,220,210,0.6)">`;
-    html+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">`;
-    html+=`<div style="display:flex;align-items:center;gap:8px">`;
-    html+=`<div style="width:36px;height:36px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px">📋</div>`;
-    html+=`<div><div style="font-size:15px;font-weight:800;color:#2D1B14">${escH(title)}</div>`;
-    html+=`<div style="font-size:11px;color:#C4A098;margin-top:1px">⏰ ${ddStr} 마감 · ${totalParticipants}명 참여</div></div>`;
-    html+=`</div>`;
-    if(isClosed){
-      html+=`<span style="background:rgba(196,160,152,0.15);color:#C4A098;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">종료</span>`;
-    }else if(!isClosed&&diffH<2){
-      html+=`<span style="background:rgba(255,92,92,0.1);color:#FF5C5C;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px">⚡ 마감임박</span>`;
+  feedItems.forEach(item=>{
+    if(item.type==='vote'){
+      html+=renderVoteCard(item.title,item.vlist,links);
+    }else{
+      html+=renderNoticeCard(item.nid,item.n);
     }
-    html+=`</div></div>`;
+  });
 
-    // 그룹 선택 버튼들
-    html+=`<div style="padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap">`;
-    vlist.forEach(([vid,v])=>{
-      const gColor=groups[v.groupId]?.color||'#FF7F6E';
-      const gName=groups[v.groupId]?.name||'';
-      const gLock=groups[v.groupId]?.lock;
-      const _ov=_optimisticVotes[vid];
-      const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-      const voted=myVote!==null;
-      const isExpanded=_expandedFeedGroup===vid;
-      const voterCnt=v.responses?Object.keys(v.responses).length:0;
+  // 인사팀 글쓰기 버튼 (하단 고정)
+  if(CU?.role==='admin'){
+    html+=`<div style="position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:50">
+      <button onclick="openNoticeModal('feed')" style="width:52px;height:52px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border:none;border-radius:50%;color:white;font-size:22px;box-shadow:0 4px 16px rgba(255,127,110,0.4);cursor:pointer;">📢</button>
+    </div>`;
+  }
 
-      html+=`<button onclick="toggleFeedGroup('${vid}')" style="
-        display:flex;align-items:center;gap:6px;
-        padding:8px 14px;border-radius:16px;border:2px solid ${voted?gColor:isExpanded?gColor:'rgba(200,180,175,0.4)'};
-        background:${voted?gColor+'18':isExpanded?gColor+'12':'white'};
-        color:${voted||isExpanded?gColor:'#8C6458'};
-        font-size:13px;font-weight:800;cursor:pointer;transition:all 0.15s;
-        ${gLock&&CU?.role!=='admin'&&!sessionStorage.getItem('unlockedGroup_'+v.groupId)?'opacity:0.7':''}
-      ">`;
-      if(voted)html+=`<span style="font-size:14px">✅</span>`;
-      else if(gLock&&CU?.role!=='admin'&&!sessionStorage.getItem('unlockedGroup_'+v.groupId))html+=`<span style="font-size:12px">🔒</span>`;
-      html+=`${escH(gName)}`;
-      if(voterCnt>0)html+=`<span style="font-size:11px;opacity:0.8">${voterCnt}</span>`;
-      html+=`</button>`;
-    });
-    html+=`</div>`;
+  html+='</div>';
+  el.innerHTML=html;
+}
 
-    // 펼쳐진 그룹 투표 옵션
-    vlist.forEach(([vid,v])=>{
-      if(_expandedFeedGroup!==vid)return;
-      const gColor=groups[v.groupId]?.color||'#FF7F6E';
-      const gName=groups[v.groupId]?.name||'';
-      const vDeadline=new Date(v.deadline);
-      const vClosed=v.closed||vDeadline<=new Date();
-      const _ov=_optimisticVotes[vid];
-      const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-      const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
-      const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
+function renderVoteCard(title,vlist,links){
+  const deadline=new Date(vlist[0][1].deadline);
+  const isClosed=vlist.every(([vid,v])=>v.closed||new Date(v.deadline)<=new Date());
+  const diffH=Math.floor((deadline-new Date())/3600000);
+  const ddStr=deadline.toLocaleDateString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  const totalParticipants=vlist.reduce((s,[vid,v])=>s+(v.responses?Object.keys(v.responses).length:0),0);
+  // 대표 vid (첫번째)
+  const repVid=vlist[0][0];
 
-      html+=`<div style="margin:0 12px 12px;background:rgba(255,248,245,0.8);border-radius:16px;border:1.5px solid ${gColor}33;overflow:hidden">`;
-      html+=`<div style="padding:10px 14px 6px;font-size:12px;font-weight:800;color:${gColor}">${escH(gName)} 투표</div>`;
+  let html=`<div style="background:white;border-radius:20px;margin:0 14px 14px;box-shadow:0 2px 16px rgba(255,127,110,0.1);border:1px solid rgba(255,210,200,0.5);overflow:hidden">`;
 
-      (v.options||[]).forEach((opt,i)=>{
-        let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
-        if(isOptimistic&&myVote===i)cnt++;
-        const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
-        const isSel=myVote===i;
-        const canVote=!vClosed&&CU?.role==='member'&&myVote===null;
-        html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}"
-          style="margin:4px 10px;border-radius:12px;"
-          ${canVote?`onclick="castVote('${vid}',${i})"`:''}>`;
-        if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}18"></div>`;
-        html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
-        html+=`<div class="vopt-label">${escH(opt)}</div>`;
-        if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
-        html+=`</div>`;
-      });
+  // ── 헤더: 아이콘 + 제목(인사팀 탭하면 수정) + 상태 ──
+  html+=`<div style="padding:14px 14px 10px;display:flex;align-items:flex-start;gap:10px">`;
+  html+=`<div style="width:40px;height:40px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📋</div>`;
+  html+=`<div style="flex:1;min-width:0">`;
+  if(CU?.role==='admin'){
+    html+=`<div id="vtitle_${repVid}" onclick="editVoteTitle('${repVid}','${escH(title)}')" style="font-size:16px;font-weight:800;color:#2D1B14;cursor:pointer;display:flex;align-items:center;gap:4px">${escH(title)}<span style="font-size:11px;color:#C4A098;font-weight:500">✏️</span></div>`;
+  }else{
+    html+=`<div style="font-size:16px;font-weight:800;color:#2D1B14">${escH(title)}</div>`;
+  }
+  html+=`<div style="font-size:11px;color:#C4A098;margin-top:2px">⏰ ${ddStr} 마감 · ${totalParticipants}명 참여</div>`;
+  html+=`</div>`;
+  if(isClosed){
+    html+=`<span style="background:rgba(196,160,152,0.15);color:#C4A098;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0">종료</span>`;
+  }else if(diffH>=0&&diffH<2){
+    html+=`<span style="background:rgba(255,92,92,0.1);color:#FF5C5C;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0">⚡임박</span>`;
+  }
+  html+=`</div>`;
 
-      if(myVote!==null){
-        const optName=(v.options||[])[myVote]||'';
-        html+=`<div style="display:flex;align-items:center;gap:8px;padding:8px 12px 10px">`;
-        html+=`<div style="flex:1;background:rgba(93,184,138,0.1);color:#5DB88A;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px">✅ ${escH(optName)} 선택완료</div>`;
-        if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVote('${vid}')">수정</button>`;
-        html+=`</div>`;
-      }else if(vClosed){
-        html+=`<div style="padding:8px 12px 10px"><div class="closed-badge">🔒 투표 종료</div></div>`;
-      }
+  // ── 그룹 버튼들 ──
+  html+=`<div style="padding:4px 14px 12px;display:flex;gap:8px;flex-wrap:wrap">`;
+  vlist.forEach(([vid,v])=>{
+    const gColor=groups[v.groupId]?.color||'#FF7F6E';
+    const gName=groups[v.groupId]?.name||'';
+    const gLock=groups[v.groupId]?.lock;
+    const _ov=_optimisticVotes[vid];
+    const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+    const voted=myVote!==null;
+    const isExpanded=_expandedFeedGroup===vid;
+    const voterCnt=v.responses?Object.keys(v.responses).length:0;
+    const locked=gLock&&CU?.role!=='admin'&&!sessionStorage.getItem('unlockedGroup_'+v.groupId);
 
-      // 링크 제출
-      if(CU?.role==='member'&&myVote!==null){
-        const myLink=links&&links[vid]?Object.values(links[vid]).find(l=>l.memberKey===CU.key):null;
-        html+=`<div style="padding:6px 10px 10px">`;
-        if(myLink){
-          html+=`<div style="font-size:11px;color:#5DB88A;font-weight:700;margin-bottom:4px">✅ 링크 제출 완료</div>`;
-          html+=`<button class="btn-sm sec" onclick="openLinkModal('${vid}',true)" style="width:100%">링크 수정</button>`;
-        }else{
-          html+=`<button class="btn-sm pri" onclick="openLinkModal('${vid}',false)" style="width:100%">📎 링크 제출하기</button>`;
-        }
-        html+=`</div>`;
-      }
+    html+=`<button onclick="toggleFeedGroup('${vid}')" style="display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExpanded?gColor:'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExpanded?gColor+'10':'white'};color:${voted||isExpanded?gColor:'#8C6458'};font-size:14px;font-weight:800;cursor:pointer;transition:all 0.15s;">`;
+    if(voted)html+=`✅ `;
+    else if(locked)html+=`🔒 `;
+    html+=escH(gName);
+    if(voterCnt>0)html+=` <span style="font-size:12px;opacity:0.7">${voterCnt}</span>`;
+    html+=`</button>`;
+  });
+  html+=`</div>`;
 
-      // 링크 목록
-      const vLinks=links&&links[vid]?Object.values(links[vid]).sort((a,b)=>(a.time||0)-(b.time||0)):[];
-      if(vLinks.length>0){
-        html+=`<div style="padding:4px 12px 10px;border-top:1px solid ${gColor}22;margin-top:4px">`;
-        html+=`<div style="font-size:11px;font-weight:800;color:${gColor};margin-bottom:6px">📎 제출 링크 (${vLinks.length}건)</div>`;
-        vLinks.forEach((l,i)=>{
-          html+=`<div style="padding:4px 0;border-bottom:1px solid rgba(255,220,210,0.4)">`;
-          html+=`<div style="font-size:12px;font-weight:700">${i+1}. ${escH(l.nick||'')}${l.note?` <span style="font-size:10px;color:#C4A098">(${escH(l.note)})</span>`:''}</div>`;
-          html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:#5B9BD5;word-break:break-all">${escH(l.url)}</a>`;
-          html+=`</div>`;
-        });
-        html+=`</div>`;
-      }
+  // ── 펼쳐진 투표 옵션 ──
+  vlist.forEach(([vid,v])=>{
+    if(_expandedFeedGroup!==vid)return;
+    const gColor=groups[v.groupId]?.color||'#FF7F6E';
+    const gName=groups[v.groupId]?.name||'';
+    const vDeadline=new Date(v.deadline);
+    const vClosed=v.closed||vDeadline<=new Date();
+    const _ov=_optimisticVotes[vid];
+    const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+    const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
+    const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
+    const myLink=links&&links[vid]?Object.values(links[vid]).find(l=>l.memberKey===CU?.key):null;
+    const vLinks=links&&links[vid]?Object.values(links[vid]).sort((a,b)=>(a.time||0)-(b.time||0)):[];
 
-      // 관리자 액션
-      if(CU?.role==='admin'){
-        html+=`<div style="display:flex;gap:6px;padding:8px 10px 10px;flex-wrap:wrap">`;
-        html+=`<button class="vbtn edit" onclick="openVoteModal('${vid}')">✏️ 수정</button>`;
-        html+=`<button class="vbtn copy" onclick="copyVote('${vid}')">📋 복사</button>`;
-        html+=vClosed
-          ?`<button class="vbtn open" onclick="toggleClose('${vid}',false)">🔓 재개</button>`
-          :`<button class="vbtn close" onclick="toggleClose('${vid}',true)">🔒 마감</button>`;
-        html+=`<button class="vbtn del" onclick="delVote('${vid}')">🗑 삭제</button>`;
-        html+=`</div>`;
-      }
+    html+=`<div style="margin:0 10px 12px;background:rgba(255,248,245,0.9);border-radius:16px;border:2px solid ${gColor}30;overflow:hidden">`;
+    html+=`<div style="padding:10px 12px 6px;font-size:12px;font-weight:800;color:${gColor};border-bottom:1px solid ${gColor}20">${escH(gName)} 투표 선택</div>`;
 
+    // 투표 옵션
+    (v.options||[]).forEach((opt,i)=>{
+      let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
+      if(isOptimistic&&myVote===i)cnt++;
+      const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
+      const isSel=myVote===i;
+      const canVote=!vClosed&&CU?.role==='member'&&myVote===null;
+      html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}" style="margin:5px 10px;border-radius:12px;" ${canVote?`onclick="castVote('${vid}',${i})"`:''}>`;
+      if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}15;pointer-events:none"></div>`;
+      html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor};color:white`:''}">${isSel?'✓':''}</div>`;
+      html+=`<div class="vopt-label">${escH(opt)}</div>`;
+      if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
       html+=`</div>`;
     });
+
+    // 투표 결과 배지
+    if(myVote!==null){
+      const optName=(v.options||[])[myVote]||'';
+      html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px 8px">`;
+      html+=`<div style="flex:1;background:rgba(93,184,138,0.1);color:#5DB88A;font-size:12px;font-weight:700;padding:7px 12px;border-radius:20px">✅ ${escH(optName)}</div>`;
+      if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVote('${vid}')">수정</button>`;
+      html+=`</div>`;
+    }else if(vClosed){
+      html+=`<div style="padding:8px 10px"><div class="closed-badge">🔒 투표 종료</div></div>`;
+    }
+
+    // 링크 제출 (사원, 투표 완료 후)
+    if(CU?.role==='member'&&myVote!==null){
+      html+=`<div style="padding:4px 10px 10px;border-top:1px solid ${gColor}20;margin-top:2px">`;
+      if(myLink){
+        html+=`<div style="font-size:11px;color:#5DB88A;font-weight:700;margin-bottom:6px">✅ 링크 제출완료</div>`;
+        html+=`<button class="btn-sm sec" onclick="openLinkModal('${vid}',true)" style="width:100%">링크 수정</button>`;
+      }else{
+        html+=`<button class="btn-sm pri" onclick="openLinkModal('${vid}',false)" style="width:100%">📎 링크 제출하기</button>`;
+      }
+      html+=`</div>`;
+    }
+
+    // 링크 목록
+    if(vLinks.length>0){
+      html+=`<div style="padding:6px 10px 10px;border-top:1px solid ${gColor}20">`;
+      html+=`<div style="font-size:11px;font-weight:800;color:${gColor};margin-bottom:6px">📎 제출 링크 (${vLinks.length}건)</div>`;
+      vLinks.forEach((l,idx)=>{
+        html+=`<div style="padding:4px 0;border-bottom:1px solid rgba(255,220,210,0.4)">`;
+        html+=`<div style="font-size:12px;font-weight:700">${idx+1}. ${escH(l.nick||'')}${l.note?` <span style="font-size:10px;color:#C4A098">(${escH(l.note)})</span>`:''}</div>`;
+        html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:#5B9BD5;word-break:break-all">${escH(l.url)}</a>`;
+        html+=`</div>`;
+      });
+      html+=`</div>`;
+    }
+
+    // 관리자 액션
+    if(CU?.role==='admin'){
+      html+=`<div style="display:flex;gap:6px;padding:8px 10px 10px;border-top:1px solid ${gColor}20;flex-wrap:wrap">`;
+      html+=`<button class="vbtn edit" onclick="openVoteModal('${vid}')">✏️ 수정</button>`;
+      html+=`<button class="vbtn copy" onclick="copyVote('${vid}')">📋 복사</button>`;
+      html+=vClosed
+        ?`<button class="vbtn open" onclick="toggleClose('${vid}',false)">🔓 재개</button>`
+        :`<button class="vbtn close" onclick="toggleClose('${vid}',true)">🔒 마감</button>`;
+      html+=`<button class="vbtn del" onclick="delVote('${vid}')">🗑 삭제</button>`;
+      html+=`</div>`;
+    }
 
     html+=`</div>`;
   });
 
+  // ── 하단 액션바: 오락실 | 공지 ──
+  html+=`<div style="display:flex;border-top:1px solid rgba(255,220,210,0.5)">`;
+  html+=`<a href="https://5sq224fdw5-eng.github.io/game31/game.html" target="_blank" style="flex:1;padding:11px;text-align:center;font-size:12px;font-weight:700;color:#6C35DE;text-decoration:none;border-right:1px solid rgba(255,220,210,0.5)">🎡 오락실</a>`;
+  html+=`<button onclick="goTab('notice')" style="flex:1;padding:11px;font-size:12px;font-weight:700;color:var(--accent);background:none;border:none;cursor:pointer">📢 공지</button>`;
   html+=`</div>`;
-  el.innerHTML=html;
+
+  html+=`</div>`;
+  return html;
+}
+
+function renderNoticeCard(nid,n){
+  const isAdmin=CU?.role==='admin';
+  let html=`<div style="background:white;border-radius:20px;margin:0 14px 14px;box-shadow:0 2px 16px rgba(255,127,110,0.1);border:1.5px solid rgba(255,179,71,0.3);overflow:hidden">`;
+
+  // 헤더
+  html+=`<div style="padding:14px 14px 10px;display:flex;align-items:flex-start;gap:10px">`;
+  html+=`<div style="width:40px;height:40px;background:linear-gradient(135deg,#FFB347,#FF9F7A);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📢</div>`;
+  html+=`<div style="flex:1;min-width:0">`;
+  html+=`<div style="font-size:16px;font-weight:800;color:#2D1B14">${escH(n.title||'')}</div>`;
+  html+=`<div style="font-size:11px;color:#C4A098;margin-top:2px">${fmtDate(n.createdAt)}</div>`;
+  html+=`</div>`;
+  if(isAdmin){
+    html+=`<div style="display:flex;gap:4px">`;
+    html+=`<button class="vbtn edit" onclick="openNoticeEditInFeed('${nid}')">✏️</button>`;
+    html+=`<button class="vbtn del" onclick="delNoticeFeed('${nid}')">🗑</button>`;
+    html+=`</div>`;
+  }
+  html+=`</div>`;
+
+  // 본문 (접기/펼치기)
+  const isExpanded=_expandedNotice===nid;
+  const body=n.body||'';
+  const preview=body.length>60?body.slice(0,60)+'…':body;
+  html+=`<div style="padding:0 14px 10px;font-size:14px;color:#8C6458;line-height:1.6;white-space:pre-wrap;cursor:pointer" onclick="toggleNoticeExpand('${nid}')">${escH(isExpanded?body:preview)}</div>`;
+  if(body.length>60){
+    html+=`<div style="padding:0 14px 8px"><button onclick="toggleNoticeExpand('${nid}')" style="font-size:12px;color:var(--accent);background:none;border:none;cursor:pointer;font-weight:700">${isExpanded?'접기 ▲':'더보기 ▼'}</button></div>`;
+  }
+
+  // 댓글 섹션
+  const comments=_cachedHomeData.noticeComments?.[nid];
+  const commentList=comments?Object.values(comments).sort((a,b)=>(a.time||0)-(b.time||0)):[];
+  if(commentList.length>0){
+    html+=`<div style="padding:6px 14px 2px;border-top:1px solid rgba(255,220,210,0.4)">`;
+    commentList.forEach(cm=>{
+      html+=`<div style="padding:6px 0;border-bottom:1px solid rgba(255,220,210,0.3)">`;
+      html+=`<span style="font-size:12px;font-weight:700;color:var(--accent)">${escH(cm.name||'')}</span>`;
+      html+=` <span style="font-size:13px;color:#2D1B14">${escH(cm.body||'')}</span>`;
+      html+=`<div style="font-size:10px;color:#C4A098;margin-top:1px">${fmtDate(cm.time)}</div>`;
+      html+=`</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // 댓글 입력 (사원)
+  if(!isAdmin){
+    html+=`<div style="display:flex;gap:6px;padding:8px 10px 10px;border-top:1px solid rgba(255,220,210,0.4)">`;
+    html+=`<input id="cmtInput_${nid}" class="fi" placeholder="댓글..." style="flex:1;padding:8px 12px;font-size:13px">`;
+    html+=`<button class="btn-sm pri" onclick="submitFeedComment('${nid}')">등록</button>`;
+    html+=`</div>`;
+  }
+
+  html+=`</div>`;
+  return html;
 }
 
 // 피드에서 그룹 펼치기/접기
 let _expandedFeedGroup=null;
+let _expandedNotice=null;
+
 function toggleFeedGroup(vid){
   const v=_cachedHomeData.votes?.[vid];
   if(!v)return;
   const gid=v.groupId;
-  // 잠금 체크
   if(CU?.role!=='admin'&&groups[gid]?.lock&&!sessionStorage.getItem('unlockedGroup_'+gid)){
     openGroupLockModal(gid,'enter');
     _pendingFeedVid=vid;
@@ -730,7 +807,54 @@ function toggleFeedGroup(vid){
   _expandedFeedGroup=(_expandedFeedGroup===vid)?null:vid;
   renderVoteCards();
 }
+
+function toggleNoticeExpand(nid){
+  _expandedNotice=(_expandedNotice===nid)?null:nid;
+  renderVoteCards();
+}
+
+async function submitFeedComment(nid){
+  const inp=document.getElementById('cmtInput_'+nid);
+  const body=inp?.value.trim();
+  if(!body){showToast('댓글을 입력하세요');return;}
+  await dbPush(`noticeComments/${nid}`,{name:CU.name,body,time:Date.now()});
+  inp.value='';
+  // 댓글 캐시 갱신
+  const comments=await dbGet(`noticeComments/${nid}`);
+  if(!_cachedHomeData.noticeComments)_cachedHomeData.noticeComments={};
+  _cachedHomeData.noticeComments[nid]=comments;
+  showToast('💬 댓글 등록됨');
+  renderVoteCards();
+}
+
+async function openNoticeEditInFeed(nid){
+  const n=await dbGet(`notices/${nid}`);
+  if(!n)return;
+  openNoticeDetail(nid,n.title,n.body||'',n.createdAt);
+}
+
+async function delNoticeFeed(nid){
+  if(!confirm('삭제하시겠습니까?'))return;
+  await dbSet(`notices/${nid}/deleted`,true);
+  showToast('🗑️ 삭제됨');
+  loadHome();
+}
+
+// 투표 제목 인라인 수정
+async function editVoteTitle(repVid,currentTitle){
+  const newTitle=prompt('투표 제목 수정',currentTitle);
+  if(!newTitle||newTitle===currentTitle)return;
+  // 같은 제목의 모든 투표 업데이트
+  const votes=_cachedHomeData.votes;
+  if(!votes)return;
+  const targets=Object.entries(votes).filter(([k,v])=>v.title===currentTitle&&!v.deleted);
+  await Promise.all(targets.map(([vid])=>dbSet(`votes/${vid}/title`,newTitle)));
+  showToast('✅ 제목 수정됨');
+  loadHome();
+}
+
 let _pendingFeedVid=null;
+
 
 function renderVoteHTML(el,votes,links){
   let html='';
@@ -1275,8 +1399,11 @@ async function saveNotice(){
   const type=document.getElementById('noticeType').value;
   const color=document.getElementById('noticeColor').value||'#FFF3CD';
   if(!title){showToast('제목을 입력하세요');return;}
-  await dbPush('notices',{title,body,type,color,createdAt:Date.now(),createdBy:CU.name});
-  closeNoticeModal();showToast('✅ 등록됨');loadNoticePage();
+  const pinned=(type==='feed'||type==='main');
+  await dbPush('notices',{title,body,type,color,pinned,createdAt:Date.now(),createdBy:CU.name});
+  closeNoticeModal();showToast('✅ 등록됨');
+  loadNoticePage();
+  if(pinned)loadHome();
 }
 
 async function loadNoticePage(){
