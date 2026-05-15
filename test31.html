@@ -21,17 +21,17 @@ button,input,textarea,select{font-family:'Noto Sans KR',sans-serif;}
 button{cursor:pointer;}
 
 /* ── 로그인 ── */
-#loginPage{position:fixed;inset:0;z-index:999;background:var(–bg);display:flex;flex-direction:column;align-items:center;overflow-y:auto;}
+#loginPage{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;overflow-y:auto;}
 .login-profile-area{width:100%;display:flex;flex-direction:column;align-items:center;padding:52px 24px 28px;background:linear-gradient(180deg,rgba(255,200,180,0.35) 0%,transparent 100%);}
 .login-logo{width:80px;height:80px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:14px;box-shadow:0 8px 24px rgba(255,127,110,0.3);}
-.login-title{font-family:‘Nunito’,sans-serif;font-size:28px;font-weight:900;background:linear-gradient(135deg,#FF7F6E,#FFB347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.login-sub{font-size:13px;color:var(–text3);}
-.login-card{width:100%;max-width:400px;background:white;border-top:1px solid var(–border);}
+.login-title{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;background:linear-gradient(135deg,#FF7F6E,#FFB347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--text3);}
+.login-card{width:100%;max-width:400px;background:white;border-top:1px solid var(--border);}
 .login-sec{padding:22px 22px 16px;}
-.login-sec+.login-sec{border-top:8px solid var(–bg);}
-.login-label{font-size:14px;font-weight:800;color:var(–text);margin-bottom:10px;}
-.fi{width:100%;padding:12px 16px;background:var(–cream);border:1.5px solid var(–border);border-radius:14px;font-size:15px;color:var(–text);outline:none;transition:all 0.2s;box-sizing:border-box;}
-.fi:focus{border-color:var(–accent);box-shadow:0 0 0 3px rgba(255,127,110,0.1);}
+.login-sec+.login-sec{border-top:8px solid var(--bg);}
+.login-label{font-size:14px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.fi{width:100%;padding:12px 16px;background:var(--cream);border:1.5px solid var(--border);border-radius:14px;font-size:15px;color:var(--text);outline:none;transition:all 0.2s;box-sizing:border-box;}
+.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,127,110,0.1);}
 .login-btn{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:800;margin-top:10px;transition:all 0.15s;}
 .login-btn.member{background:linear-gradient(135deg,#FF9F7A,#FF7F6E);color:white;box-shadow:0 4px 16px rgba(255,127,110,0.3);}
 .login-btn.admin{background:linear-gradient(135deg,#FFB347,#FF9F7A);color:white;}
@@ -41,7 +41,7 @@ button{cursor:pointer;}
 #app{height:100vh;flex-direction:row;}
 
 /* ── 사이드바 ── */
-.sidebar{width:240px;min-width:240px;background:var(–sidebar);display:flex;flex-direction:column;height:100vh;overflow:hidden;flex-shrink:0;}
+.sidebar{width:240px;min-width:240px;background:var(--sidebar);display:flex;flex-direction:column;height:100vh;overflow:hidden;flex-shrink:0;}
 @media(max-width:600px){
 .sidebar{width:200px;min-width:200px;}
 }
@@ -50,11 +50,11 @@ button{cursor:pointer;}
 .sb-profile{padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,0.07);}
 .sb-logo{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
 .sb-logo-icon{width:28px;height:28px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;}
-.sb-logo-text{font-family:‘Nunito’,sans-serif;font-size:16px;font-weight:900;color:white;}
+.sb-logo-text{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:white;}
 .sb-user{display:flex;align-items:center;gap:10px;}
 .sb-avatar{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:white;flex-shrink:0;position:relative;}
 .sb-avatar.admin-av{background:linear-gradient(135deg,#FFB347,#FF9F7A);}
-.online-dot{position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;background:#5DB88A;border:2px solid var(–sidebar);}
+.online-dot{position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;background:#5DB88A;border:2px solid var(--sidebar);}
 .sb-user-info{flex:1;min-width:0;}
 .sb-name{font-size:13px;font-weight:700;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .sb-role{font-size:11px;color:rgba(255,255,255,0.45);margin-top:1px;}
@@ -69,7 +69,7 @@ button{cursor:pointer;}
 .sb-item{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:0;cursor:pointer;transition:all 0.12s;color:rgba(255,255,255,0.6);font-size:13px;font-weight:600;width:100%;border:none;background:none;text-align:left;position:relative;}
 .sb-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.9);}
 .sb-item.active{background:rgba(255,127,110,0.2);color:#FF9F7A;font-weight:700;}
-.sb-item.active::before{content:’’;position:absolute;left:0;top:0;bottom:0;width:3px;background:var(–accent);border-radius:0 2px 2px 0;}
+.sb-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:0 2px 2px 0;}
 .sb-item-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
 .sb-badge{margin-left:auto;background:#FF5C5C;color:white;font-size:10px;font-weight:800;padding:2px 6px;border-radius:10px;}
 
@@ -85,10 +85,10 @@ button{cursor:pointer;}
 .sb-game:hover{background:rgba(108,53,222,0.3);}
 
 /* ── 메인 콘텐츠 ── */
-.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;background:var(–bg);}
-.main-header{background:white;border-bottom:1px solid var(–border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.main-header-title{font-size:16px;font-weight:800;color:var(–text);}
-.main-header-sub{font-size:12px;color:var(–text3);margin-top:1px;}
+.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;background:var(--bg);}
+.main-header{background:white;border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.main-header-title{font-size:16px;font-weight:800;color:var(--text);}
+.main-header-sub{font-size:12px;color:var(--text3);margin-top:1px;}
 .main-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 
 /* ── 공통 컴포넌트 ── */
@@ -99,60 +99,60 @@ button{cursor:pointer;}
 .overlay.active .modal{transform:translateY(0);}
 .modal-title{font-size:18px;font-weight:800;margin-bottom:16px;}
 .fl{margin-bottom:12px;}
-.fl label{display:block;font-size:12px;font-weight:700;color:var(–text2);margin-bottom:5px;}
+.fl label{display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px;}
 .btn-row{display:flex;gap:8px;margin-top:16px;}
 .btn-pri{flex:1;padding:13px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);color:white;border:none;border-radius:14px;font-size:15px;font-weight:800;}
-.btn-sec{flex:1;padding:13px;background:var(–surface2);color:var(–text2);border:none;border-radius:14px;font-size:15px;font-weight:700;}
+.btn-sec{flex:1;padding:13px;background:var(--surface2);color:var(--text2);border:none;border-radius:14px;font-size:15px;font-weight:700;}
 .btn-sm{padding:8px 16px;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;}
 .btn-sm.pri{background:linear-gradient(135deg,#FF9F7A,#FF7F6E);color:white;}
-.btn-sm.sec{background:var(–surface2);color:var(–text2);}
-.card{background:white;border-radius:16px;border:1px solid var(–border);margin:0 14px 12px;overflow:hidden;}
-.empty{text-align:center;padding:60px 20px;color:var(–text3);}
+.btn-sm.sec{background:var(--surface2);color:var(--text2);}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin:0 14px 12px;overflow:hidden;}
+.empty{text-align:center;padding:60px 20px;color:var(--text3);}
 .empty-icon{font-size:40px;margin-bottom:10px;}
 .loading{text-align:center;padding:60px 20px;}
-.spinner{width:28px;height:28px;border:3px solid var(–border);border-top-color:var(–accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto;}
+.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.stitle{font-size:14px;font-weight:800;color:var(–text2);padding:0 16px 8px;}
+.stitle{font-size:14px;font-weight:800;color:var(--text2);padding:0 16px 8px;}
 
 /* ── 투표 카드 ── */
-.vopt{position:relative;display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid var(–border);background:white;margin-bottom:6px;transition:all 0.15s;cursor:pointer;overflow:hidden;-webkit-user-select:none;}
+.vopt{position:relative;display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1.5px solid var(--border);background:white;margin-bottom:6px;transition:all 0.15s;cursor:pointer;overflow:hidden;-webkit-user-select:none;}
 .vopt.closed{cursor:default;}
-.vopt.selected{border-color:var(–accent);background:rgba(255,127,110,0.06);}
-.vopt:not(.closed):not(.selected):active{background:var(–cream);}
+.vopt.selected{border-color:var(--accent);background:rgba(255,127,110,0.06);}
+.vopt:not(.closed):not(.selected):active{background:var(--cream);}
 .vbar{position:absolute;left:0;top:0;bottom:0;background:rgba(255,127,110,0.08);transition:width 0.4s;z-index:0;border-radius:12px;pointer-events:none;}
-.vopt-chk{width:20px;height:20px;border-radius:50%;border:2px solid var(–border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;z-index:1;transition:all 0.15s;}
-.vopt.selected .vopt-chk{background:var(–accent);border-color:var(–accent);}
-.vopt-label{flex:1;font-size:14px;font-weight:600;color:var(–text);z-index:1;}
-.vopt-cnt{font-size:12px;font-weight:700;color:var(–text3);z-index:1;}
+.vopt-chk{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;flex-shrink:0;z-index:1;transition:all 0.15s;}
+.vopt.selected .vopt-chk{background:var(--accent);border-color:var(--accent);}
+.vopt-label{flex:1;font-size:14px;font-weight:600;color:var(--text);z-index:1;}
+.vopt-cnt{font-size:12px;font-weight:700;color:var(--text3);z-index:1;}
 .vbtn{padding:6px 12px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;}
-.vbtn.edit{background:rgba(91,155,213,0.1);color:var(–blue);}
-.vbtn.copy{background:rgba(255,179,71,0.1);color:var(–gold);}
-.vbtn.close{background:rgba(255,92,92,0.1);color:var(–red);}
-.vbtn.open{background:rgba(93,184,138,0.1);color:var(–green);}
-.vbtn.del{background:rgba(255,92,92,0.08);color:var(–red);}
-.vbtn.reset{background:rgba(255,179,71,0.1);color:var(–gold);}
-.voted-badge{background:rgba(93,184,138,0.1);color:var(–green);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;}
-.closed-badge{background:rgba(196,160,152,0.1);color:var(–text3);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;text-align:center;}
-.link-list{border-top:1px solid var(–border);padding:10px 16px;}
-.link-list-title{font-size:12px;font-weight:800;color:var(–text2);margin-bottom:6px;}
-.link-item{padding:5px 0;border-bottom:1px solid var(–surface2);}
+.vbtn.edit{background:rgba(91,155,213,0.1);color:var(--blue);}
+.vbtn.copy{background:rgba(255,179,71,0.1);color:var(--gold);}
+.vbtn.close{background:rgba(255,92,92,0.1);color:var(--red);}
+.vbtn.open{background:rgba(93,184,138,0.1);color:var(--green);}
+.vbtn.del{background:rgba(255,92,92,0.08);color:var(--red);}
+.vbtn.reset{background:rgba(255,179,71,0.1);color:var(--gold);}
+.voted-badge{background:rgba(93,184,138,0.1);color:var(--green);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;}
+.closed-badge{background:rgba(196,160,152,0.1);color:var(--text3);font-size:13px;font-weight:700;padding:8px 14px;border-radius:20px;text-align:center;}
+.link-list{border-top:1px solid var(--border);padding:10px 16px;}
+.link-list-title{font-size:12px;font-weight:800;color:var(--text2);margin-bottom:6px;}
+.link-item{padding:5px 0;border-bottom:1px solid var(--surface2);}
 .link-num-name{font-size:12px;font-weight:700;}
-.link-url a{font-size:11px;color:var(–blue);word-break:break-all;}
-.link-form{padding:10px 16px;border-top:1px solid var(–border);}
+.link-url a{font-size:11px;color:var(--blue);word-break:break-all;}
+.link-form{padding:10px 16px;border-top:1px solid var(--border);}
 .vadmin{display:flex;gap:6px;padding:0 16px 12px;flex-wrap:wrap;}
 
 /* ── 캘린더 ── */
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:0 12px 12px;}
 .cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:8px 12px 4px;}
-.cal-dh{text-align:center;font-size:11px;font-weight:700;color:var(–text3);}
+.cal-dh{text-align:center;font-size:11px;font-weight:700;color:var(--text3);}
 .cal-cell{min-height:36px;border-radius:8px;display:flex;flex-direction:column;align-items:center;padding:3px;cursor:pointer;transition:background 0.1s;}
-.cal-cell:hover{background:var(–cream);}
-.cal-cell.today .cal-dn{background:var(–accent);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
-.cal-cell.selected{background:var(–cream);}
-.cal-dn{font-size:12px;font-weight:600;color:var(–text);width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
-.cal-dn.sun{color:var(–red);}
-.cal-dn.sat{color:var(–blue);}
-.cal-dot{width:5px;height:5px;border-radius:50%;background:var(–accent);margin-top:1px;}
+.cal-cell:hover{background:var(--cream);}
+.cal-cell.today .cal-dn{background:var(--accent);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
+.cal-cell.selected{background:var(--cream);}
+.cal-dn{font-size:12px;font-weight:600;color:var(--text);width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
+.cal-dn.sun{color:var(--red);}
+.cal-dn.sat{color:var(--blue);}
+.cal-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:1px;}
 
 /* ── 채팅 ── */
 .msg-row{display:flex;gap:8px;align-items:flex-end;max-width:100%;}
@@ -160,20 +160,20 @@ button{cursor:pointer;}
 .msg-avatar{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:white;flex-shrink:0;}
 .msg-content{display:flex;flex-direction:column;gap:3px;max-width:70%;}
 .msg-row.me .msg-content{align-items:flex-end;}
-.msg-name{font-size:11px;font-weight:700;color:var(–text3);padding:0 4px;}
+.msg-name{font-size:11px;font-weight:700;color:var(--text3);padding:0 4px;}
 .msg-bubble{padding:9px 13px;border-radius:18px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap;}
-.msg-bubble.other{background:white;border:1px solid var(–border);color:var(–text);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(255,127,110,0.08);}
+.msg-bubble.other{background:white;border:1px solid var(--border);color:var(--text);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(255,127,110,0.08);}
 .msg-bubble.me{background:linear-gradient(135deg,#FF9F7A,#FF7F6E);color:white;border-bottom-right-radius:4px;}
-.msg-time{font-size:10px;color:var(–text3);padding:0 4px;}
-.msg-date-sep{text-align:center;font-size:11px;color:var(–text3);padding:10px 0 4px;font-weight:600;}
-.chat-room-item{display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;border-bottom:1px solid var(–border);transition:background 0.1s;}
-.chat-room-item:hover{background:var(–cream);}
+.msg-time{font-size:10px;color:var(--text3);padding:0 4px;}
+.msg-date-sep{text-align:center;font-size:11px;color:var(--text3);padding:10px 0 4px;font-weight:600;}
+.chat-room-item{display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.1s;}
+.chat-room-item:hover{background:var(--cream);}
 .chat-room-item.active{background:rgba(255,127,110,0.07);}
 .chat-room-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:white;flex-shrink:0;}
 
 /* ── 멤버 리스트 ── */
 .member-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-bottom:1px solid rgba(255,220,210,0.3);transition:background 0.1s;}
-.member-item:hover{background:var(–cream);}
+.member-item:hover{background:var(--cream);}
 .member-avatar{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:white;flex-shrink:0;position:relative;}
 .member-online-dot{position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;border-radius:50%;background:#5DB88A;border:2px solid white;}
 
@@ -187,14 +187,14 @@ button{cursor:pointer;}
 
 /* ── 설정 ── */
 .setting-section{padding:16px;}
-.setting-section+.setting-section{border-top:8px solid var(–bg);}
-.setting-section-title{font-size:13px;font-weight:800;color:var(–text2);margin-bottom:12px;}
-.setting-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(–border);}
+.setting-section+.setting-section{border-top:8px solid var(--bg);}
+.setting-section-title{font-size:13px;font-weight:800;color:var(--text2);margin-bottom:12px;}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);}
 .setting-row:last-child{border-bottom:none;}
 
 ::-webkit-scrollbar{width:3px;height:3px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 </style>
 
 </head>
@@ -254,7 +254,6 @@ button{cursor:pointer;}
       </div>
     </div>
 
-```
 <!-- 메뉴 -->
 <div class="sb-menu">
 
@@ -301,7 +300,6 @@ button{cursor:pointer;}
 <a href="https://5sq224fdw5-eng.github.io/game31/game.html" target="_blank" class="sb-game">
   🎡 오락실 바로가기
 </a>
-```
 
   </div>
 
@@ -913,15 +911,15 @@ function loadChatTab(){
       html+=`<div style="padding:10px 14px 12px;border-top:1px solid var(--border);background:white;display:flex;gap:8px;align-items:flex-end">`;
       html+=`<textarea id="chatInput" rows="1" placeholder="메시지 입력..." onkeydown="chatKeydown(event)" oninput="autoResize(this)" style="flex:1;border:1.5px solid var(--border);border-radius:18px;padding:9px 14px;font-size:14px;font-family:inherit;resize:none;outline:none;max-height:80px;line-height:1.5;background:var(--cream)"></textarea>`;
 
-html+=`<button onclick="sendChat()" style="width:40px;height:40px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border:none;border-radius:50%;color:white;font-size:17px;flex-shrink:0;box-shadow:0 3px 10px rgba(255,127,110,0.3)">➤</button>`;
-html+=`</div>`;
+  html+=`<button onclick="sendChat()" style="width:40px;height:40px;background:linear-gradient(135deg,#FF9F7A,#FF7F6E);border:none;border-radius:50%;color:white;font-size:17px;flex-shrink:0;box-shadow:0 3px 10px rgba(255,127,110,0.3)">➤</button>`;
+  html+=`</div>`;
 }
 
 }
 html+=`</div></div>`;
 mb.innerHTML=html;
 
-if(_currentChatRoom&&(isJoined(_currentChatRoom)||CU?.role===‘admin’)){
+if(_currentChatRoom&&(isJoined(_currentChatRoom)||CU?.role==='admin')){
 fetchChatMessages();
 clearInterval(window._chatPoll);
 window._chatPoll=setInterval(fetchChatMessages,4000);
@@ -930,7 +928,7 @@ loadChatMemberCount();
 }
 
 async function loadChatMemberCount(){
-const el=document.getElementById(‘chatMemberCount’);
+const el=document.getElementById('chatMemberCount');
 if(!el||!_currentChatRoom)return;
 const path=getChatPath(_currentChatRoom);
 const presence=await dbGet(`chat_presence/${getRoomKey(_currentChatRoom)}`);
@@ -945,12 +943,12 @@ loadChatTab();
 
 async function joinChat(){
 if(!_currentChatRoom)return;
-const pw=document.getElementById(‘chatPwInput’)?.value||’’;
+const pw=document.getElementById('chatPwInput')?.value||'';
 // 채팅방 비번 확인 (부서 잠금 비번과 동일)
-if(_currentChatRoom.type===‘dept’){
+if(_currentChatRoom.type==='dept'){
 const g=groups[_currentChatRoom.id];
-if(g?.lock&&g.lock!==pw){showToast(‘비밀번호가 틀렸습니다’);return;}
-}else if(_currentChatRoom.type===‘all’){
+if(g?.lock&&g.lock!==pw){showToast('비밀번호가 틀렸습니다');return;}
+}else if(_currentChatRoom.type==='all'){
 // 전체 채팅: 별도 비번 없음 (빈 칸으로 입장 가능)
 }
 // 입장 처리
@@ -959,7 +957,7 @@ setJoined(_currentChatRoom,true);
 const path=getChatPath(_currentChatRoom);
 await dbPush(path,{
 body:`${CU.name}님이 입장했습니다`,
-senderName:‘시스템’,senderKey:‘system’,senderRole:‘system’,
+senderName:'시스템',senderKey:'system',senderRole:'system',
 time:Date.now(),system:true
 });
 // presence 등록
@@ -969,12 +967,12 @@ loadChatTab();
 
 async function leaveChat(){
 if(!_currentChatRoom)return;
-if(!confirm(‘채팅방에서 퇴장하시겠습니까?’))return;
+if(!confirm('채팅방에서 퇴장하시겠습니까?'))return;
 const path=getChatPath(_currentChatRoom);
 // 퇴장 시스템 메시지
 await dbPush(path,{
 body:`${CU.name}님이 퇴장했습니다`,
-senderName:‘시스템’,senderKey:‘system’,senderRole:‘system’,
+senderName:'시스템',senderKey:'system',senderRole:'system',
 time:Date.now(),system:true
 });
 // presence 제거
@@ -985,14 +983,14 @@ loadChatTab();
 }
 
 async function fetchChatMessages(){
-const el=document.getElementById(‘chatMessages’);
+const el=document.getElementById('chatMessages');
 if(!el||!_currentChatRoom)return;
 const path=getChatPath(_currentChatRoom);
 const msgs=await dbGet(path);
 window._currentMsgData=msgs||{};
 
 if(!msgs){
-el.innerHTML=’<div style="text-align:center;padding:30px;color:var(--text3)">아직 메시지가 없어요</div>’;
+el.innerHTML='<div style="text-align:center;padding:30px;color:var(--text3)">아직 메시지가 없어요</div>';
 return;
 }
 
@@ -1001,18 +999,18 @@ const list=Object.entries(msgs)
 .sort((a,b)=>(a[1].time||0)-(b[1].time||0));
 
 // 뱃지 처리
-const badge=document.getElementById(‘chatBadge’);
-const isOnChat=_currentTab===‘chat’;
+const badge=document.getElementById('chatBadge');
+const isOnChat=_currentTab==='chat';
 if(!isOnChat&&list.length>_lastChatCount&&_lastChatCount>0){
 const diff=list.length-_lastChatCount;
-if(badge){badge.style.display=’’;badge.textContent=diff>99?‘99+’:diff;}
+if(badge){badge.style.display='';badge.textContent=diff>99?'99+':diff;}
 }
-if(isOnChat&&badge)badge.style.display=‘none’;
+if(isOnChat&&badge)badge.style.display='none';
 _lastChatCount=list.length;
 
 const wasAtBottom=el.scrollHeight-el.scrollTop-el.clientHeight<80;
-const isAdmin=CU?.role===‘admin’;
-let html=’’;let lastDate=’’;
+const isAdmin=CU?.role==='admin';
+let html='';let lastDate='';
 
 list.forEach(([mid,m])=>{
 // 시스템 메시지
@@ -1020,25 +1018,26 @@ if(m.system){
 html+=`<div style="text-align:center;padding:4px 0"><span style="font-size:11px;color:var(--text3);background:rgba(200,180,175,0.15);padding:4px 12px;border-radius:20px">${escH(m.body||'')}</span></div>`;
 return;
 }
-const isMe=(CU?.role===‘admin’&&m.senderRole===‘admin’)||(m.senderKey===CU?.key);
+const isMe=(CU?.role==='admin'&&m.senderRole==='admin')||(m.senderKey===CU?.key);
 const d=new Date(m.time||0);
-const dateStr=d.toLocaleDateString(‘ko-KR’,{month:‘long’,day:‘numeric’,weekday:‘short’});
-const timeStr=d.toLocaleTimeString(‘ko-KR’,{hour:‘2-digit’,minute:‘2-digit’});
+const dateStr=d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'});
+const timeStr=d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
 if(dateStr!==lastDate){html+=`<div class="msg-date-sep">${dateStr}</div>`;lastDate=dateStr;}
-const avColor=m.senderRole===‘admin’?‘linear-gradient(135deg,#FFB347,#FF9F7A)’:‘linear-gradient(135deg,#FF9F7A,#FF7F6E)’;
+const avColor=m.senderRole==='admin'?'linear-gradient(135deg,#FFB347,#FF9F7A)':'linear-gradient(135deg,#FF9F7A,#FF7F6E)';
 
 html+=`<div class="msg-row ${isMe?'me':''}" id="msg_${mid}">`;
 if(!isMe)html+=`<div class="msg-avatar" style="background:${avColor};cursor:default">${(m.senderName||'?')[0]}</div>`;
 html+=`<div class="msg-content">`;
 if(!isMe)html+=`<div class="msg-name">${escH(m.senderName||'')}${m.senderRole==='admin'?' 👑':''}</div>`;
 // 롱프레스 / 우클릭으로 메뉴
-html+=`<div class=“msg-bubble ${isMe?‘me’:‘other’}”
-oncontextmenu=“event.preventDefault();showMsgMenu(’${mid}’,event.clientX,event.clientY)”
-ontouchstart=”_pressTimer=setTimeout(()=>showMsgMenu(’${mid}’,event.touches[0].clientX,event.touches[0].clientY),600)”
-ontouchend=“clearTimeout(_pressTimer)”
-ontouchmove=“clearTimeout(_pressTimer)”
-
-> ${escH(m.body||’’)}</div>`; html+=`<div class="msg-time">${timeStr}</div>`; html+=`</div></div>`;
+html+=`<div class="msg-bubble ${isMe?'me':'other'}"
+  oncontextmenu="event.preventDefault();showMsgMenu('${mid}',event.clientX,event.clientY)"
+  ontouchstart="_pressTimer=setTimeout(()=>showMsgMenu('${mid}',event.touches[0].clientX,event.touches[0].clientY),600)"
+  ontouchend="clearTimeout(_pressTimer)"
+  ontouchmove="clearTimeout(_pressTimer)"
+>${escH(m.body||'')}</div>`;
+html+=`<div class="msg-time">${timeStr}</div>`;
+html+=`</div></div>`;
 
 });
 el.innerHTML=html;
@@ -1046,35 +1045,35 @@ if(wasAtBottom)el.scrollTop=el.scrollHeight;
 }
 
 async function sendChat(){
-const inp=document.getElementById(‘chatInput’);
+const inp=document.getElementById('chatInput');
 const body=inp?.value.trim();
 if(!body||!_currentChatRoom)return;
-inp.value=’’;inp.style.height=’’;
-const msg={body,senderName:CU.name,senderKey:CU.key||‘admin’,senderRole:CU.role,time:Date.now()};
+inp.value='';inp.style.height='';
+const msg={body,senderName:CU.name,senderKey:CU.key||'admin',senderRole:CU.role,time:Date.now()};
 const path=getChatPath(_currentChatRoom);
 await dbPush(path,msg);
 await fetchChatMessages();
 }
 
-function chatKeydown(e){if(e.key===‘Enter’&&!e.shiftKey){e.preventDefault();sendChat();}}
-function autoResize(el){el.style.height=‘auto’;el.style.height=Math.min(el.scrollHeight,80)+‘px’;}
+function chatKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px';}
 
 // ══════════════════════════════════════════════
 // ── MEMBERS ──
 // ══════════════════════════════════════════════
 async function loadMembersPage(){
-const mb=document.getElementById(‘mainBody’);
-const [mems,grps]=await Promise.all([dbGet(‘members’),dbGet(‘groups’)]);
+const mb=document.getElementById('mainBody');
+const [mems,grps]=await Promise.all([dbGet('members'),dbGet('groups')]);
 members=mems||{};
 
 if(!mems||Object.keys(mems).length===0){
-mb.innerHTML=’<div class="empty"><div class="empty-icon">👥</div>등록된 멤버가 없습니다</div>’;
+mb.innerHTML='<div class="empty"><div class="empty-icon">👥</div>등록된 멤버가 없습니다</div>';
 return;
 }
 
 // 부서별로 그룹핑 (멤버에 groupId 필드가 있으면)
 // 없으면 그냥 전체 리스트
-let html=’<div style="padding:14px 0 60px">’;
+let html='<div style="padding:14px 0 60px">';
 
 // 부서별 섹션
 if(grps){
@@ -1094,13 +1093,13 @@ unassigned.forEach(([k,m])=>{html+=memberRow(k,m,null,null);});
 Object.entries(mems).forEach(([k,m])=>{html+=memberRow(k,m,null,null);});
 }
 
-html+=’</div>’;
+html+='</div>';
 mb.innerHTML=html;
 }
 
 function memberRow(k,m,gid,g){
-const color=g?.color||’#FF9F7A’;
-const initial=(m.name||’?’)[0];
+const color=g?.color||'#FF9F7A';
+const initial=(m.name||'?')[0];
 let html=`<div class="member-item" onclick="openDMWithMember('${k}','${escH(m.name||'')}')">`;
 html+=`<div class="member-avatar" style="background:linear-gradient(135deg,${color},${color}bb)">`;
 html+=initial;
@@ -1117,41 +1116,41 @@ return html;
 }
 
 function openDMWithMember(memberKey,name){
-if(memberKey===CU?.key){showToast(‘자신에게는 DM을 보낼 수 없어요’);return;}
-_currentChatRoom={type:‘dm’,id:memberKey,name:`${name}님과 대화`};
-goTab(‘chat’);
+if(memberKey===CU?.key){showToast('자신에게는 DM을 보낼 수 없어요');return;}
+_currentChatRoom={type:'dm',id:memberKey,name:`${name}님과 대화`};
+goTab('chat');
 }
 
 // ══════════════════════════════════════════════
 // ── DEPT PAGE (부서별 투표) ──
 // ══════════════════════════════════════════════
 async function loadDeptPage(gid){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
-const [votes,links]=await Promise.all([dbGet(‘votes’),dbGet(‘links’)]);
-_cachedData={…_cachedData,votes,links};
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+const [votes,links]=await Promise.all([dbGet('votes'),dbGet('links')]);
+_cachedData={..._cachedData,votes,links};
 
 const gVotes=votes?Object.entries(votes).filter(([k,v])=>!v.deleted&&v.groupId===gid).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0)):[];
-const isAdmin=CU?.role===‘admin’;
+const isAdmin=CU?.role==='admin';
 
 if(isAdmin){
-setMainHeader(`💼 ${groups[gid]?.name||''} 업무`,groups[gid]?.name+’ 부서’,
+setMainHeader(`💼 ${groups[gid]?.name||''} 업무`,groups[gid]?.name+' 부서',
 `<button class="btn-sm pri" onclick="openVoteModal()">+ 투표 만들기</button>`);
 }
 
 if(gVotes.length===0){
-let html=’<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>’;
+let html='<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>';
 mb.innerHTML=html;return;
 }
 
-let html=’<div style="padding:14px 0 80px">’;
+let html='<div style="padding:14px 0 80px">';
 gVotes.forEach(([vid,v])=>{html+=renderSingleVoteCard(vid,v,links,gid);});
-html+=’</div>’;
+html+='</div>';
 mb.innerHTML=html;
 }
 
 function renderSingleVoteCard(vid,v,links,gid){
-const gColor=groups[gid]?.color||‘var(–accent)’;
+const gColor=groups[gid]?.color||'var(--accent)';
 const deadline=new Date(v.deadline);
 const isClosed=v.closed||deadline<=new Date();
 const _ov=_optimisticVotes[vid];
@@ -1159,8 +1158,8 @@ const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.respo
 const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
 const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
 const diffH=Math.floor((deadline-new Date())/3600000);
-const ddStr=deadline.toLocaleDateString(‘ko-KR’,{month:‘numeric’,day:‘numeric’,hour:‘2-digit’,minute:‘2-digit’});
-const isAdmin=CU?.role===‘admin’;
+const ddStr=deadline.toLocaleDateString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+const isAdmin=CU?.role==='admin';
 const myLink=links&&links[vid]?Object.values(links[vid]).find(l=>l.memberKey===CU?.key):null;
 const vLinks=links&&links[vid]?Object.values(links[vid]).sort((a,b)=>(a.time||0)-(b.time||0)):[];
 
@@ -1187,8 +1186,8 @@ let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
 if(isOptimistic&&myVote===i)cnt++;
 const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
 const isSel=myVote===i;
-const canVote=!isClosed&&CU?.role===‘member’&&myVote===null;
-html+=`<div class="vopt${isSel?' selected':''}${isClosed||myVote!==null?' closed':''}" ${canVote?`onclick=“castVoteInDept(’${vid}’,${i},’${gid}’)”`:''}>`;
+const canVote=!isClosed&&CU?.role==='member'&&myVote===null;
+html+=`<div class="vopt${isSel?' selected':''}${isClosed||myVote!==null?' closed':''}" ${canVote?`onclick="castVoteInDept('${vid}',${i},'${gid}')"`:''}>`;
 if(isClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%"></div>`;
 html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
 html+=`<div class="vopt-label">${escH(opt)}</div>`;
@@ -1199,7 +1198,7 @@ html+=`</div>`;
 
 // 결과 / 링크
 if(myVote!==null){
-const optName=(v.options||[])[myVote]||’’;
+const optName=(v.options||[])[myVote]||'';
 html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 12px 10px">`;
 html+=`<div class="voted-badge" style="flex:1">✅ ${escH(optName)}</div>`;
 if(!isClosed)html+=`<button class="vbtn reset" onclick="resetVoteDept('${vid}','${gid}')">수정</button>`;
@@ -1209,7 +1208,7 @@ html+=`<div style="padding:6px 12px 10px"><div class="closed-badge">🔒 투표 
 }
 
 // 링크 제출
-if(CU?.role===‘member’&&(myVote!==null||!isClosed)){
+if(CU?.role==='member'&&(myVote!==null||!isClosed)){
 html+=`<div class="link-form">`;
 if(myLink){
 html+=`<div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px">✅ 링크 제출완료</div>`;
@@ -1246,19 +1245,19 @@ return html;
 
 // 부서 투표 캐스팅 (낙관적)
 async function castVoteInDept(vid,optIdx,gid){
-if(!CU?.key){showToast(‘로그인이 필요합니다’);return;}
+if(!CU?.key){showToast('로그인이 필요합니다');return;}
 _optimisticVotes[vid]=optIdx;
-showToast(‘✅ 투표 완료!’);
+showToast('✅ 투표 완료!');
 loadDeptPage(gid);
 const v=await dbGet(`votes/${vid}`);
-if(!v||v.closed||new Date(v.deadline)<=new Date()){delete _optimisticVotes[vid];showToast(‘투표가 종료되었습니다’);loadDeptPage(gid);return;}
-const gName=groups[gid]?.name||’’;
-const optName=(v.options||[])[optIdx]||’’;
+if(!v||v.closed||new Date(v.deadline)<=new Date()){delete _optimisticVotes[vid];showToast('투표가 종료되었습니다');loadDeptPage(gid);return;}
+const gName=groups[gid]?.name||'';
+const optName=(v.options||[])[optIdx]||'';
 Promise.all([
 dbSet(`votes/${vid}/responses/${CU.key}`,optIdx),
 dbSet(`calendar/${todayStr}/${CU.key}/${vid}`,{groupId:gid,groupName:gName,option:optName,voteTitle:v.title,time:Date.now()})
 ]).then(()=>{
-const isStartVote=v.title.includes(‘시작’)||v.title.includes(‘출근’);
+const isStartVote=v.title.includes('시작')||v.title.includes('출근');
 if(isStartVote)syncWithGame(gid,gName,optName);
 loadDeptPage(gid);
 });
@@ -1266,7 +1265,7 @@ loadDeptPage(gid);
 
 async function resetVoteDept(vid,gid){
 if(!CU?.key)return;
-if(!confirm(‘투표를 수정하시겠습니까?’))return;
+if(!confirm('투표를 수정하시겠습니까?'))return;
 _optimisticVotes[vid]=-1;
 loadDeptPage(gid);
 Promise.all([dbDel(`votes/${vid}/responses/${CU.key}`),dbDel(`calendar/${todayStr}/${CU.key}/${vid}`)]).then(()=>{
@@ -1275,11 +1274,11 @@ delete _optimisticVotes[vid];loadDeptPage(gid);
 }
 
 async function inlineEditTitle(vid,currentTitle){
-const newTitle=prompt(‘투표 제목 수정’,currentTitle);
+const newTitle=prompt('투표 제목 수정',currentTitle);
 if(!newTitle||newTitle===currentTitle)return;
 await dbSet(`votes/${vid}/title`,newTitle);
-showToast(‘✅ 수정됨’);
-if(_currentTab===‘dept’)loadDeptPage(_currentDept);
+showToast('✅ 수정됨');
+if(_currentTab==='dept')loadDeptPage(_currentDept);
 else loadHome();
 }
 
@@ -1290,35 +1289,35 @@ let _cachedHomeData={votes:null,links:null,notices:null,noticeComments:null};
 let _expandedFeedGroupHome=null;
 
 async function loadHome(){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
-const isAdmin=CU?.role===‘admin’;
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+const isAdmin=CU?.role==='admin';
 if(isAdmin){
-setMainHeader(‘💼 전체 투표’,‘모든 부서’,`<button class="btn-sm pri" onclick="openVoteModal()">+ 투표 만들기</button>`);
+setMainHeader('💼 전체 투표','모든 부서',`<button class="btn-sm pri" onclick="openVoteModal()">+ 투표 만들기</button>`);
 }
-const [votes,links]=await Promise.all([dbGet(‘votes’),dbGet(‘links’)]);
-_cachedHomeData={…_cachedHomeData,votes,links};
+const [votes,links]=await Promise.all([dbGet('votes'),dbGet('links')]);
+_cachedHomeData={..._cachedHomeData,votes,links};
 renderHomeFeed(mb,votes,links);
 }
 
 function renderHomeFeed(el,votes,links){
 const allVotes=votes?Object.entries(votes).filter(([k,v])=>!v.deleted):[];
-if(allVotes.length===0){el.innerHTML=’<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>’;return;}
+if(allVotes.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div>투표가 없습니다</div>';return;}
 
 // 제목별 그룹핑
 const byTitle={};
 allVotes.forEach(([vid,v])=>{
-const t=v.title||’’;
+const t=v.title||'';
 if(!byTitle[t])byTitle[t]=[];
 byTitle[t].push([vid,v]);
 });
 
-let html=’<div style="padding:14px 0 80px">’;
-Object.entries(byTitle).sort((a,b)=>Math.max(…b[1].map(([,v])=>v.createdAt||0))-Math.max(…a[1].map(([,v])=>v.createdAt||0))).forEach(([title,vlist])=>{
+let html='<div style="padding:14px 0 80px">';
+Object.entries(byTitle).sort((a,b)=>Math.max(...b[1].map(([,v])=>v.createdAt||0))-Math.max(...a[1].map(([,v])=>v.createdAt||0))).forEach(([title,vlist])=>{
 const deadline=new Date(vlist[0][1].deadline);
 const isClosed=vlist.every(([vid,v])=>v.closed||new Date(v.deadline)<=new Date());
 const diffH=Math.floor((deadline-new Date())/3600000);
-const ddStr=deadline.toLocaleDateString(‘ko-KR’,{month:‘numeric’,day:‘numeric’,hour:‘2-digit’,minute:‘2-digit’});
+const ddStr=deadline.toLocaleDateString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
 const totalP=vlist.reduce((s,[vid,v])=>s+(v.responses?Object.keys(v.responses).length:0),0);
 const repVid=vlist[0][0];
 
@@ -1334,55 +1333,55 @@ html+=`</div>`;
 // 부서 버튼들 (가로 스크롤)
 html+=`<div style="padding:8px 14px 12px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">`;
 vlist.forEach(([vid,v])=>{
-const gColor=groups[v.groupId]?.color||’#FF7F6E’;
-const gName=groups[v.groupId]?.name||’’;
-const _ov=_optimisticVotes[vid];
-const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-const voted=myVote!==null;
-const isExp=_expandedFeedGroupHome===vid;
-const vClosed=v.closed||new Date(v.deadline)<=new Date();
-const voterCnt=v.responses?Object.keys(v.responses).length:0;
-html+=`<button onclick="toggleHomeFeedGroup('${vid}')" style="flex:none;display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExp?gColor:vClosed?'rgba(200,180,175,0.2)':'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExp?gColor+'10':vClosed?'rgba(240,235,233,0.5)':'white'};color:${voted?gColor:isExp?gColor:vClosed?'var(--text3)':'var(--text2)'};font-size:13px;font-weight:800;cursor:${vClosed&&!voted?'default':'pointer'};white-space:nowrap;${vClosed&&!voted?'opacity:0.5':''}">`;
-if(voted)html+=`✅ `;
-html+=escH(gName);
-if(voterCnt>0)html+=` <span style="font-size:11px;opacity:0.7">${voterCnt}명</span>`;
-html+=`</button>`;
+  const gColor=groups[v.groupId]?.color||'#FF7F6E';
+  const gName=groups[v.groupId]?.name||'';
+  const _ov=_optimisticVotes[vid];
+  const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+  const voted=myVote!==null;
+  const isExp=_expandedFeedGroupHome===vid;
+  const vClosed=v.closed||new Date(v.deadline)<=new Date();
+  const voterCnt=v.responses?Object.keys(v.responses).length:0;
+  html+=`<button onclick="toggleHomeFeedGroup('${vid}')" style="flex:none;display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:20px;border:2px solid ${voted?gColor:isExp?gColor:vClosed?'rgba(200,180,175,0.2)':'rgba(200,180,175,0.35)'};background:${voted?gColor+'15':isExp?gColor+'10':vClosed?'rgba(240,235,233,0.5)':'white'};color:${voted?gColor:isExp?gColor:vClosed?'var(--text3)':'var(--text2)'};font-size:13px;font-weight:800;cursor:${vClosed&&!voted?'default':'pointer'};white-space:nowrap;${vClosed&&!voted?'opacity:0.5':''}">`;
+  if(voted)html+=`✅ `;
+  html+=escH(gName);
+  if(voterCnt>0)html+=` <span style="font-size:11px;opacity:0.7">${voterCnt}명</span>`;
+  html+=`</button>`;
 });
 html+=`</div>`;
 
 // 펼쳐진 투표
 vlist.forEach(([vid,v])=>{
-if(_expandedFeedGroupHome!==vid)return;
-const gColor=groups[v.groupId]?.color||’#FF7F6E’;
-const gName=groups[v.groupId]?.name||’’;
-const vClosed=v.closed||new Date(v.deadline)<=new Date();
-const _ov=_optimisticVotes[vid];
-const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
-const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
-const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
+  if(_expandedFeedGroupHome!==vid)return;
+  const gColor=groups[v.groupId]?.color||'#FF7F6E';
+  const gName=groups[v.groupId]?.name||'';
+  const vClosed=v.closed||new Date(v.deadline)<=new Date();
+  const _ov=_optimisticVotes[vid];
+  const myVote=(_ov!==undefined)?(_ov===-1?null:_ov):(CU?.key&&v.responses?v.responses[CU.key]??null:null);
+  const isOptimistic=_ov!==undefined&&_ov!==-1&&!(CU?.key&&v.responses&&v.responses[CU.key]!==undefined);
+  const totalVoters=(v.responses?Object.keys(v.responses).length:0)+(isOptimistic?1:0);
 
-html+=`<div style="margin:0 10px 12px;background:rgba(255,248,245,0.9);border-radius:14px;border:2px solid ${gColor}30;overflow:hidden">`;
-html+=`<div style="padding:8px 12px 4px;font-size:12px;font-weight:800;color:${gColor}">${escH(gName)}</div>`;
-(v.options||[]).forEach((opt,i)=>{
-let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
-if(isOptimistic&&myVote===i)cnt++;
-const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
-const isSel=myVote===i;
-const canVote=!vClosed&&CU?.role===‘member’&&myVote===null;
-html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}" style="margin:4px 8px;border-radius:10px" ${canVote?`onclick=“castVoteInFeed(’${vid}’,${i})”`:''}> `;
-if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}15"></div>`;
-html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
-html+=`<div class="vopt-label">${escH(opt)}</div>`;
-if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
-html+=`</div>`;
-});
-if(myVote!==null){
-const optName=(v.options||[])[myVote]||’’;
-html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px 8px"><div class="voted-badge" style="flex:1">✅ ${escH(optName)}</div>`;
-if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVoteFeed('${vid}')">수정</button>`;
-html+=`</div>`;
-}
-html+=`</div>`;
+  html+=`<div style="margin:0 10px 12px;background:rgba(255,248,245,0.9);border-radius:14px;border:2px solid ${gColor}30;overflow:hidden">`;
+  html+=`<div style="padding:8px 12px 4px;font-size:12px;font-weight:800;color:${gColor}">${escH(gName)}</div>`;
+  (v.options||[]).forEach((opt,i)=>{
+    let cnt=v.responses?Object.values(v.responses).filter(r=>r===i).length:0;
+    if(isOptimistic&&myVote===i)cnt++;
+    const pct=totalVoters>0?Math.round(cnt/totalVoters*100):0;
+    const isSel=myVote===i;
+    const canVote=!vClosed&&CU?.role==='member'&&myVote===null;
+    html+=`<div class="vopt${isSel?' selected':''}${vClosed||myVote!==null?' closed':''}" style="margin:4px 8px;border-radius:10px" ${canVote?`onclick="castVoteInFeed('${vid}',${i})"`:''}> `;
+    if(vClosed||myVote!==null)html+=`<div class="vbar" style="width:${pct}%;background:${gColor}15"></div>`;
+    html+=`<div class="vopt-chk" style="${isSel?`background:${gColor};border-color:${gColor}`:''}">${isSel?'✓':''}</div>`;
+    html+=`<div class="vopt-label">${escH(opt)}</div>`;
+    if(vClosed||myVote!==null)html+=`<div class="vopt-cnt">${cnt}명</div>`;
+    html+=`</div>`;
+  });
+  if(myVote!==null){
+    const optName=(v.options||[])[myVote]||'';
+    html+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 10px 8px"><div class="voted-badge" style="flex:1">✅ ${escH(optName)}</div>`;
+    if(!vClosed)html+=`<button class="vbtn reset" onclick="resetVoteFeed('${vid}')">수정</button>`;
+    html+=`</div>`;
+  }
+  html+=`</div>`;
 });
 
 // 하단 액션바
@@ -1393,23 +1392,23 @@ html+=`</div>`;
 html+=`</div>`;
 
 });
-html+=’</div>’;
+html+='</div>';
 el.innerHTML=html;
 }
 
 async function castVoteInFeed(vid,optIdx){
-if(!CU?.key){showToast(‘로그인이 필요합니다’);return;}
+if(!CU?.key){showToast('로그인이 필요합니다');return;}
 _optimisticVotes[vid]=optIdx;
-showToast(‘✅ 투표 완료!’);
-renderHomeFeed(document.getElementById(‘mainBody’),_cachedHomeData.votes,_cachedHomeData.links);
+showToast('✅ 투표 완료!');
+renderHomeFeed(document.getElementById('mainBody'),_cachedHomeData.votes,_cachedHomeData.links);
 const v=await dbGet(`votes/${vid}`);
-if(!v||v.closed||new Date(v.deadline)<=new Date()){delete _optimisticVotes[vid];showToast(‘종료된 투표입니다’);loadHome();return;}
-const gid=v.groupId;const gName=groups[gid]?.name||’’;const optName=(v.options||[])[optIdx]||’’;
+if(!v||v.closed||new Date(v.deadline)<=new Date()){delete _optimisticVotes[vid];showToast('종료된 투표입니다');loadHome();return;}
+const gid=v.groupId;const gName=groups[gid]?.name||'';const optName=(v.options||[])[optIdx]||'';
 Promise.all([
 dbSet(`votes/${vid}/responses/${CU.key}`,optIdx),
 dbSet(`calendar/${todayStr}/${CU.key}/${vid}`,{groupId:gid,groupName:gName,option:optName,voteTitle:v.title,time:Date.now()})
 ]).then(()=>{
-const isStartVote=v.title.includes(‘시작’)||v.title.includes(‘출근’);
+const isStartVote=v.title.includes('시작')||v.title.includes('출근');
 if(isStartVote)syncWithGame(gid,gName,optName);
 loadHome();
 });
@@ -1417,9 +1416,9 @@ loadHome();
 
 async function resetVoteFeed(vid){
 if(!CU?.key)return;
-if(!confirm(‘투표를 수정하시겠습니까?’))return;
+if(!confirm('투표를 수정하시겠습니까?'))return;
 _optimisticVotes[vid]=-1;
-renderHomeFeed(document.getElementById(‘mainBody’),_cachedHomeData.votes,_cachedHomeData.links);
+renderHomeFeed(document.getElementById('mainBody'),_cachedHomeData.votes,_cachedHomeData.links);
 Promise.all([dbDel(`votes/${vid}/responses/${CU.key}`),dbDel(`calendar/${todayStr}/${CU.key}/${vid}`)]).then(()=>{
 delete _optimisticVotes[vid];loadHome();
 });
@@ -1429,142 +1428,142 @@ function toggleHomeFeedGroup(vid){
 const v=_cachedHomeData.votes?.[vid];
 if(!v)return;
 const gid=v.groupId;
-if(CU?.role!==‘admin’&&groups[gid]?.lock&&!sessionStorage.getItem(‘unlockedGroup*’+gid)){
+if(CU?.role!=='admin'&&groups[gid]?.lock&&!sessionStorage.getItem('unlockedGroup_'+gid)){
 _pendingFeedVid=vid;
-openGroupLockModal(gid,‘enter’);
+openGroupLockModal(gid,'enter');
 return;
 }
 _expandedFeedGroupHome=(_expandedFeedGroupHome===vid)?null:vid;
-renderHomeFeed(document.getElementById(‘mainBody’),_cachedHomeData.votes,_cachedHomeData.links);
+renderHomeFeed(document.getElementById('mainBody'),_cachedHomeData.votes,_cachedHomeData.links);
 }
 
 // ══════════════════════════════════════════════
 // ── VOTE MODAL ──
 // ══════════════════════════════════════════════
 function populateGroupSelect(){
-const sel=document.getElementById(‘voteGroup’);
-sel.innerHTML=Object.entries(groups).map(([id,g])=>`<option value="${id}">${escH(g.name)}</option>`).join(’’);
+const sel=document.getElementById('voteGroup');
+sel.innerHTML=Object.entries(groups).map(([id,g])=>`<option value="${id}">${escH(g.name)}</option>`).join('');
 if(_currentDept&&groups[_currentDept])sel.value=_currentDept;
 }
 function openVoteModal(vid){
 populateGroupSelect();
-document.getElementById(‘editVoteId’).value=’’;
-document.getElementById(‘voteTitle’).value=’’;
-document.getElementById(‘voteDate’).value=todayStr;
-document.getElementById(‘voteTime’).value=‘22:00’;
-document.getElementById(‘optList’).innerHTML=’’;
-[‘출근’,‘🏖️연차’,‘2인1조’,‘투피드’,‘재능기부’,‘열정페이’].forEach(o=>addOpt(o));
+document.getElementById('editVoteId').value='';
+document.getElementById('voteTitle').value='';
+document.getElementById('voteDate').value=todayStr;
+document.getElementById('voteTime').value='22:00';
+document.getElementById('optList').innerHTML='';
+['출근','🏖️연차','2인1조','투피드','재능기부','열정페이'].forEach(o=>addOpt(o));
 if(vid)loadVoteForEdit(vid);
-document.getElementById(‘voteModal’).classList.add(‘active’);
+document.getElementById('voteModal').classList.add('active');
 }
 async function loadVoteForEdit(vid){
 const v=await dbGet(`votes/${vid}`);if(!v)return;
-document.getElementById(‘editVoteId’).value=vid;
-document.getElementById(‘voteTitle’).value=v.title||’’;
-document.getElementById(‘voteDate’).value=(v.deadline||’’).slice(0,10);
-document.getElementById(‘voteTime’).value=(v.deadline||‘T22:00’).slice(11,16);
-document.getElementById(‘voteGroup’).value=v.groupId||’’;
-document.getElementById(‘optList’).innerHTML=’’;
+document.getElementById('editVoteId').value=vid;
+document.getElementById('voteTitle').value=v.title||'';
+document.getElementById('voteDate').value=(v.deadline||'').slice(0,10);
+document.getElementById('voteTime').value=(v.deadline||'T22:00').slice(11,16);
+document.getElementById('voteGroup').value=v.groupId||'';
+document.getElementById('optList').innerHTML='';
 (v.options||[]).forEach(o=>addOpt(o));
 }
-function closeVoteModal(){document.getElementById(‘voteModal’).classList.remove(‘active’);}
-function addOpt(val=’’){
-const d=document.createElement(‘div’);d.style=‘display:flex;gap:6px;margin-bottom:6px’;
+function closeVoteModal(){document.getElementById('voteModal').classList.remove('active');}
+function addOpt(val=''){
+const d=document.createElement('div');d.style='display:flex;gap:6px;margin-bottom:6px';
 d.innerHTML=`<input class="fi" value="${escH(val)}" placeholder="선택지" class="opt-input" style="flex:1"><button onclick="this.parentNode.remove()" style="background:var(--surface2);border:none;border-radius:10px;padding:0 10px;color:var(--text3);font-size:16px">×</button>`;
-d.querySelector(‘input’).classList.add(‘opt-input’);
-document.getElementById(‘optList’).appendChild(d);
+d.querySelector('input').classList.add('opt-input');
+document.getElementById('optList').appendChild(d);
 }
 async function saveVote(){
-const vid=document.getElementById(‘editVoteId’).value;
-const title=document.getElementById(‘voteTitle’).value.trim();
-const date=document.getElementById(‘voteDate’).value;
-const time=document.getElementById(‘voteTime’).value;
-const groupId=document.getElementById(‘voteGroup’).value;
-if(!title||!date){showToast(‘제목과 날짜를 입력하세요’);return;}
-const opts=[…document.getElementById(‘optList’).querySelectorAll(’.opt-input’)].map(i=>i.value.trim()).filter(Boolean);
-if(opts.length<2){showToast(‘선택지를 2개 이상 입력하세요’);return;}
+const vid=document.getElementById('editVoteId').value;
+const title=document.getElementById('voteTitle').value.trim();
+const date=document.getElementById('voteDate').value;
+const time=document.getElementById('voteTime').value;
+const groupId=document.getElementById('voteGroup').value;
+if(!title||!date){showToast('제목과 날짜를 입력하세요');return;}
+const opts=[...document.getElementById('optList').querySelectorAll('.opt-input')].map(i=>i.value.trim()).filter(Boolean);
+if(opts.length<2){showToast('선택지를 2개 이상 입력하세요');return;}
 const data={title,groupId,options:opts,deadline:`${date}T${time}:00`,createdAt:Date.now(),closed:false};
 if(vid){
 const old=await dbGet(`votes/${vid}`);
 data.responses=old?.responses||{};data.createdAt=old?.createdAt||Date.now();
-await dbSet(`votes/${vid}`,data);showToast(‘✅ 수정됨’);
+await dbSet(`votes/${vid}`,data);showToast('✅ 수정됨');
 closeVoteModal();
-if(_currentTab===‘dept’)loadDeptPage(groupId);else loadHome();
+if(_currentTab==='dept')loadDeptPage(groupId);else loadHome();
 }else{
-await dbPush(‘votes’,data);
+await dbPush('votes',data);
 closeVoteModal();
-if(_currentTab===‘dept’)loadDeptPage(groupId);else loadHome();
+if(_currentTab==='dept')loadDeptPage(groupId);else loadHome();
 showKakaoShareModal(title,date,time);
 }
 }
 function showKakaoShareModal(title,date,time){
 const d=new Date(`${date}T${time}:00`);
-const ddStr=d.toLocaleDateString(‘ko-KR’,{month:‘numeric’,day:‘numeric’,weekday:‘short’});
-const ttStr=d.toLocaleTimeString(‘ko-KR’,{hour:‘2-digit’,minute:‘2-digit’});
+const ddStr=d.toLocaleDateString('ko-KR',{month:'numeric',day:'numeric',weekday:'short'});
+const ttStr=d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
 const msg=`📋 [crew31] ${title}\n⏰ 마감: ${ddStr} ${ttStr}\n\n👉 https://5sq224fdw5-eng.github.io/crew31/crew31.html`;
-document.getElementById(‘kakaoMsgText’).value=msg;
-document.getElementById(‘kakaoShareModal’).classList.add(‘active’);
+document.getElementById('kakaoMsgText').value=msg;
+document.getElementById('kakaoShareModal').classList.add('active');
 }
 function copyKakaoMsg(){
-const txt=document.getElementById(‘kakaoMsgText’).value;
-navigator.clipboard.writeText(txt).then(()=>{showToast(‘📋 복사됨!’);document.getElementById(‘kakaoShareModal’).classList.remove(‘active’);}).catch(()=>{document.getElementById(‘kakaoMsgText’).select();showToast(‘텍스트를 길게 눌러 복사하세요’);});
+const txt=document.getElementById('kakaoMsgText').value;
+navigator.clipboard.writeText(txt).then(()=>{showToast('📋 복사됨!');document.getElementById('kakaoShareModal').classList.remove('active');}).catch(()=>{document.getElementById('kakaoMsgText').select();showToast('텍스트를 길게 눌러 복사하세요');});
 }
 async function copyVote(vid){
 const v=await dbGet(`votes/${vid}`);if(!v)return;
 populateGroupSelect();
-document.getElementById(‘editVoteId’).value=’’;
-document.getElementById(‘voteTitle’).value=v.title;
-document.getElementById(‘voteDate’).value=todayStr;
-document.getElementById(‘voteTime’).value=(v.deadline||‘T22:00’).slice(11,16);
-document.getElementById(‘voteGroup’).value=v.groupId||’’;
-document.getElementById(‘optList’).innerHTML=’’;
+document.getElementById('editVoteId').value='';
+document.getElementById('voteTitle').value=v.title;
+document.getElementById('voteDate').value=todayStr;
+document.getElementById('voteTime').value=(v.deadline||'T22:00').slice(11,16);
+document.getElementById('voteGroup').value=v.groupId||'';
+document.getElementById('optList').innerHTML='';
 (v.options||[]).forEach(o=>addOpt(o));
-document.getElementById(‘voteModal’).classList.add(‘active’);
+document.getElementById('voteModal').classList.add('active');
 }
 async function toggleClose(vid,close){
-await dbSet(`votes/${vid}/closed`,close);showToast(close?‘🔒 마감됨’:‘🔓 재개됨’);
-if(_currentTab===‘dept’)loadDeptPage(_currentDept);else loadHome();
+await dbSet(`votes/${vid}/closed`,close);showToast(close?'🔒 마감됨':'🔓 재개됨');
+if(_currentTab==='dept')loadDeptPage(_currentDept);else loadHome();
 }
 async function delVote(vid){
-if(!confirm(‘삭제하시겠습니까?’))return;
-await dbSet(`votes/${vid}/deleted`,true);showToast(‘🗑️ 삭제됨’);
-if(_currentTab===‘dept’)loadDeptPage(_currentDept);else loadHome();
+if(!confirm('삭제하시겠습니까?'))return;
+await dbSet(`votes/${vid}/deleted`,true);showToast('🗑️ 삭제됨');
+if(_currentTab==='dept')loadDeptPage(_currentDept);else loadHome();
 }
 
 // ══════════════════════════════════════════════
 // ── LINK MODAL ──
 // ══════════════════════════════════════════════
 function openLinkModal(vid,editing){
-document.getElementById(‘linkVoteId’).value=vid;
-document.getElementById(‘linkEditing’).value=editing?‘1’:’’;
-document.getElementById(‘linkNick’).value=CU?.name||’’;
-document.getElementById(‘linkUrl’).value=’’;
-document.getElementById(‘linkNote’).value=’’;
-document.getElementById(‘linkModal’).classList.add(‘active’);
+document.getElementById('linkVoteId').value=vid;
+document.getElementById('linkEditing').value=editing?'1':'';
+document.getElementById('linkNick').value=CU?.name||'';
+document.getElementById('linkUrl').value='';
+document.getElementById('linkNote').value='';
+document.getElementById('linkModal').classList.add('active');
 }
-function closeLinkModal(){document.getElementById(‘linkModal’).classList.remove(‘active’);}
+function closeLinkModal(){document.getElementById('linkModal').classList.remove('active');}
 function cleanInstagramUrl(url){
 if(!url)return url;
-url=url.replace(//reel//,’/p/’);
-const qi=url.indexOf(’?’);
+url=url.replace(/\/reel\//,'/p/');
+const qi=url.indexOf('?');
 if(qi>-1)url=url.slice(0,qi);
 return url;
 }
 async function submitLink(){
-const vid=document.getElementById(‘linkVoteId’).value;
-const nick=document.getElementById(‘linkNick’).value.trim();
-let url=document.getElementById(‘linkUrl’).value.trim();
-const note=document.getElementById(‘linkNote’).value.trim();
-if(!nick){showToast(‘닉네임을 입력하세요’);return;}
+const vid=document.getElementById('linkVoteId').value;
+const nick=document.getElementById('linkNick').value.trim();
+let url=document.getElementById('linkUrl').value.trim();
+const note=document.getElementById('linkNote').value.trim();
+if(!nick){showToast('닉네임을 입력하세요');return;}
 url=cleanInstagramUrl(url);
-if(!url){showToast(‘URL을 입력하세요’);return;}
+if(!url){showToast('URL을 입력하세요');return;}
 const existing=await dbGet(`links/${vid}`);
 const myKey=existing?Object.entries(existing).find(([k,l])=>l.memberKey===CU?.key)?.[0]:null;
 const data={nick,url,note,memberKey:CU?.key,time:Date.now()};
 if(myKey)await dbSet(`links/${vid}/${myKey}`,data);
 else await dbPush(`links/${vid}`,data);
-closeLinkModal();showToast(‘✅ 링크 제출됨’);
-if(_currentTab===‘dept’)loadDeptPage(_currentDept);else loadHome();
+closeLinkModal();showToast('✅ 링크 제출됨');
+if(_currentTab==='dept')loadDeptPage(_currentDept);else loadHome();
 }
 
 // ══════════════════════════════════════════════
@@ -1572,45 +1571,45 @@ if(_currentTab===‘dept’)loadDeptPage(_currentDept);else loadHome();
 // ══════════════════════════════════════════════
 function openGroupLockModal(groupId,action){
 _lockAction=action;
-document.getElementById(‘lockTargetGroupId’).value=groupId;
-document.getElementById(‘lockPwInput’).value=’’;
-const g=groups[groupId];const gName=g?.name||‘그룹’;
-const isAdmin=CU?.role===‘admin’;
-const pwInput=document.getElementById(‘lockPwInput’);
-const pwLabel=document.getElementById(‘lockPwLabel’);
-if(isAdmin){pwInput.maxLength=50;pwInput.inputMode=‘text’;pwLabel.textContent=‘비밀번호 (자유 입력)’;}
-else{pwInput.maxLength=4;pwInput.inputMode=‘numeric’;pwLabel.textContent=‘4자리 비밀번호’;}
-const titles={lock:‘🔒 잠금 설정’,unlock:‘🔓 잠금 해제’,enter:`🔒 ${gName}`,chatenter:`🔒 ${gName} 채팅`};
-const descs={lock:`${gName} 탭에 사용할 비밀번호`,unlock:‘현재 비밀번호를 입력하세요’,enter:‘비밀번호를 입력하세요’,chatenter:‘채팅방 비밀번호를 입력하세요’};
-document.getElementById(‘lockModalTitle’).textContent=titles[action]||‘🔒 잠금’;
-document.getElementById(‘lockModalDesc’).textContent=descs[action]||‘비밀번호를 입력하세요’;
-document.getElementById(‘groupLockModal’).classList.add(‘active’);
-setTimeout(()=>document.getElementById(‘lockPwInput’).focus(),300);
+document.getElementById('lockTargetGroupId').value=groupId;
+document.getElementById('lockPwInput').value='';
+const g=groups[groupId];const gName=g?.name||'그룹';
+const isAdmin=CU?.role==='admin';
+const pwInput=document.getElementById('lockPwInput');
+const pwLabel=document.getElementById('lockPwLabel');
+if(isAdmin){pwInput.maxLength=50;pwInput.inputMode='text';pwLabel.textContent='비밀번호 (자유 입력)';}
+else{pwInput.maxLength=4;pwInput.inputMode='numeric';pwLabel.textContent='4자리 비밀번호';}
+const titles={lock:'🔒 잠금 설정',unlock:'🔓 잠금 해제',enter:`🔒 ${gName}`,chatenter:`🔒 ${gName} 채팅`};
+const descs={lock:`${gName} 탭에 사용할 비밀번호`,unlock:'현재 비밀번호를 입력하세요',enter:'비밀번호를 입력하세요',chatenter:'채팅방 비밀번호를 입력하세요'};
+document.getElementById('lockModalTitle').textContent=titles[action]||'🔒 잠금';
+document.getElementById('lockModalDesc').textContent=descs[action]||'비밀번호를 입력하세요';
+document.getElementById('groupLockModal').classList.add('active');
+setTimeout(()=>document.getElementById('lockPwInput').focus(),300);
 }
-function closeGroupLockModal(){document.getElementById(‘groupLockModal’).classList.remove(‘active’);}
+function closeGroupLockModal(){document.getElementById('groupLockModal').classList.remove('active');}
 async function confirmGroupLock(){
-const gid=document.getElementById(‘lockTargetGroupId’).value;
-const pw=document.getElementById(‘lockPwInput’).value;
-const isAdmin=CU?.role===‘admin’;
-if(!isAdmin&&(pw.length!==4||!/^\d{4}$/.test(pw))){showToast(‘4자리 숫자를 입력하세요’);return;}
-if(!pw){showToast(‘비밀번호를 입력하세요’);return;}
+const gid=document.getElementById('lockTargetGroupId').value;
+const pw=document.getElementById('lockPwInput').value;
+const isAdmin=CU?.role==='admin';
+if(!isAdmin&&(pw.length!==4||!/^\d{4}$/.test(pw))){showToast('4자리 숫자를 입력하세요');return;}
+if(!pw){showToast('비밀번호를 입력하세요');return;}
 const g=await dbGet(`groups/${gid}`);
-if(_lockAction===‘lock’){
+if(_lockAction==='lock'){
 await dbSet(`groups/${gid}/lock`,pw);
-groups[gid]={…groups[gid],lock:pw};
-showToast(‘🔒 잠금 설정됨’);closeGroupLockModal();renderDeptSubMenu();
-}else if(_lockAction===‘unlock’){
-if(g?.lock!==pw){showToast(‘비밀번호가 틀렸습니다’);return;}
+groups[gid]={...groups[gid],lock:pw};
+showToast('🔒 잠금 설정됨');closeGroupLockModal();renderDeptSubMenu();
+}else if(_lockAction==='unlock'){
+if(g?.lock!==pw){showToast('비밀번호가 틀렸습니다');return;}
 await dbSet(`groups/${gid}/lock`,null);
-groups[gid]={…groups[gid],lock:null};
-showToast(‘🔓 잠금 해제됨’);closeGroupLockModal();renderDeptSubMenu();
-}else if(_lockAction===‘enter’||_lockAction===‘chatenter’){
-if(g?.lock!==pw){showToast(‘비밀번호가 틀렸습니다’);return;}
-sessionStorage.setItem(‘unlockedGroup*’+gid,‘1’);
+groups[gid]={...groups[gid],lock:null};
+showToast('🔓 잠금 해제됨');closeGroupLockModal();renderDeptSubMenu();
+}else if(_lockAction==='enter'||_lockAction==='chatenter'){
+if(g?.lock!==pw){showToast('비밀번호가 틀렸습니다');return;}
+sessionStorage.setItem('unlockedGroup_'+gid,'1');
 closeGroupLockModal();
-if(_lockAction===‘chatenter’){openChatRoom(‘dept’,gid,groups[gid]?.name+’ 채팅’);}
+if(_lockAction==='chatenter'){openChatRoom('dept',gid,groups[gid]?.name+' 채팅');}
 else if(_pendingDept===gid){_pendingDept=null;goDept(gid);}
-else if(_pendingFeedVid){const vid=_pendingFeedVid;_pendingFeedVid=null;_expandedFeedGroupHome=vid;renderHomeFeed(document.getElementById(‘mainBody’),_cachedHomeData.votes,_cachedHomeData.links);}
+else if(_pendingFeedVid){const vid=_pendingFeedVid;_pendingFeedVid=null;_expandedFeedGroupHome=vid;renderHomeFeed(document.getElementById('mainBody'),_cachedHomeData.votes,_cachedHomeData.links);}
 }
 }
 
@@ -1621,30 +1620,30 @@ async function syncWithGame(groupId,groupName,optionName){
 try{
 const crewName=CU?.name;if(!crewName)return;
 const prefix=groupName;const gameNick=prefix+crewName;
-const allMembers=await gameGet(‘members’);if(!allMembers)return;
-const entry=Object.entries(allMembers).find(([k,m])=>m.name===gameNick||(m.name||’’).replace(/^*/,’’)===gameNick);
+const allMembers=await gameGet('members');if(!allMembers)return;
+const entry=Object.entries(allMembers).find(([k,m])=>m.name===gameNick||(m.name||'').replace(/^\*/,'')===gameNick);
 if(!entry)return;
 const[mk,mm]=entry;
-const DEDUCT_OPTIONS=[‘출근’,‘업무시작’,‘라이브시작’];
+const DEDUCT_OPTIONS=['출근','업무시작','라이브시작'];
 const shouldDeduct=DEDUCT_OPTIONS.some(o=>optionName.includes(o));
 if(!shouldDeduct)return;
 const DEDUCT_AMOUNT=10;
 const currentCoins=mm.coins||0;
-if(currentCoins<DEDUCT_AMOUNT){showToast(‘⚠️ 오락실 코인 부족’);return;}
+if(currentCoins<DEDUCT_AMOUNT){showToast('⚠️ 오락실 코인 부족');return;}
 await gameSet(`members/${mk}/coins`,currentCoins-DEDUCT_AMOUNT);
 await gamePush(`coinLog`,{memberKey:mk,name:gameNick,amount:-DEDUCT_AMOUNT,reason:`crew31 투표: ${optionName}`,time:Date.now()});
-}catch(e){console.error(‘syncWithGame error’,e);}
+}catch(e){console.error('syncWithGame error',e);}
 }
 
 // ══════════════════════════════════════════════
 // ── CALENDAR ──
 // ══════════════════════════════════════════════
 async function renderCalendar(){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
 const monthKey=`${calY}-${String(calM+1).padStart(2,'0')}`;
-const allCal=await dbGet(‘calendar’);
-const days=[‘일’,‘월’,‘화’,‘수’,‘목’,‘금’,‘토’];
+const allCal=await dbGet('calendar');
+const days=['일','월','화','수','목','금','토'];
 const first=new Date(calY,calM,1).getDay();
 const last=new Date(calY,calM+1,0).getDate();
 const today=getKSTDate();
@@ -1677,7 +1676,7 @@ if(calSel&&allCal&&allCal[calSel]){
 html+=`<div style="padding:12px 14px;border-top:1px solid var(--border)">`;
 html+=`<div style="font-size:13px;font-weight:800;color:var(--text2);margin-bottom:8px">${calSel} 참여 내역</div>`;
 const dayData=allCal[calSel];
-const members_data=await dbGet(‘members’);
+const members_data=await dbGet('members');
 Object.entries(dayData).forEach(([memberKey,votes])=>{
 const mName=members_data?.[memberKey]?.name||memberKey;
 Object.values(votes).forEach(entry=>{
@@ -1695,38 +1694,38 @@ html+=`<div style="padding:12px 14px;color:var(--text3);font-size:13px;text-alig
 
 mb.innerHTML=html;
 }
-function calMove(d){if(d<0){if(calM===0){calY–;calM=11;}else calM–;}else{if(calM===11){calY++;calM=0;}else calM++;}renderCalendar();}
+function calMove(d){if(d<0){if(calM===0){calY--;calM=11;}else calM--;}else{if(calM===11){calY++;calM=0;}else calM++;}renderCalendar();}
 function selectCalDay(ds){calSel=ds;renderCalendar();}
 
 // ══════════════════════════════════════════════
 // ── LEAVE ──
 // ══════════════════════════════════════════════
 async function loadLeave(){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
-const crewName=CU?.role===‘admin’?null:CU?.name;
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+const crewName=CU?.role==='admin'?null:CU?.name;
 const [gameMembers,allMemberPrizes,allMemberLeave,allLeaveLog]=await Promise.all([
-gameGet(‘members’),gameGet(‘memberPrizes’),gameGet(‘memberLeave’),gameGet(‘leaveLog’)
+gameGet('members'),gameGet('memberPrizes'),gameGet('memberLeave'),gameGet('leaveLog')
 ]);
-if(!gameMembers){mb.innerHTML=’<div class="empty"><div class="empty-icon">⚠️</div>오락실 연결 실패</div>’;return;}
-const GAME_GROUPS=[‘좋아요’,‘댓글’,‘시크릿’];
+if(!gameMembers){mb.innerHTML='<div class="empty"><div class="empty-icon">⚠️</div>오락실 연결 실패</div>';return;}
+const GAME_GROUPS=['좋아요','댓글','시크릿'];
 let targetAccounts=[];
-if(CU?.role===‘admin’){
+if(CU?.role==='admin'){
 targetAccounts=Object.entries(gameMembers).map(([k,m])=>({key:k,name:m.name}));
 }else{
 targetAccounts=Object.entries(gameMembers)
-.filter(([k,m])=>m.name.replace(/^*/,’’).replace(/^(좋아요|댓글|시크릿)/,’’)===crewName)
+.filter(([k,m])=>m.name.replace(/^\*/,'').replace(/^(좋아요|댓글|시크릿)/,'')===crewName)
 .map(([k,m])=>({key:k,name:m.name}));
 if(targetAccounts.length===0){
-const nameVariants=[crewName,…GAME_GROUPS.map(g=>g+crewName)];
+const nameVariants=[crewName,...GAME_GROUPS.map(g=>g+crewName)];
 targetAccounts=Object.entries(gameMembers)
-.filter(([k,m])=>nameVariants.some(v=>m.name===v||m.name===(’*’+v)))
+.filter(([k,m])=>nameVariants.some(v=>m.name===v||m.name===('*'+v)))
 .map(([k,m])=>({key:k,name:m.name}));
 }
 }
-if(targetAccounts.length===0){mb.innerHTML=’<div class="empty"><div class="empty-icon">🔍</div>오락실 계정을 찾을 수 없어요</div>’;return;}
+if(targetAccounts.length===0){mb.innerHTML='<div class="empty"><div class="empty-icon">🔍</div>오락실 계정을 찾을 수 없어요</div>';return;}
 
-let html=’<div style="padding:14px 0 60px">’;
+let html='<div style="padding:14px 0 60px">';
 targetAccounts.forEach(({key:mk,name:gNick})=>{
 const m=gameMembers[mk];if(!m)return;
 const prizes=allMemberPrizes?.[mk]?Object.values(allMemberPrizes[mk]).filter(p=>!p.deleted):[];
@@ -1751,7 +1750,7 @@ html+=`</div>`;
 }
 html+=`</div>`;
 });
-html+=’</div>’;
+html+='</div>';
 mb.innerHTML=html;
 }
 
@@ -1759,17 +1758,17 @@ mb.innerHTML=html;
 // ── STATUS ──
 // ══════════════════════════════════════════════
 async function loadStatus(){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
-const [votes,links,mems]=await Promise.all([dbGet(‘votes’),dbGet(‘links’),dbGet(‘members’)]);
-if(!votes){mb.innerHTML=’<div class="empty"><div class="empty-icon">📭</div>투표 없음</div>’;return;}
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+const [votes,links,mems]=await Promise.all([dbGet('votes'),dbGet('links'),dbGet('members')]);
+if(!votes){mb.innerHTML='<div class="empty"><div class="empty-icon">📭</div>투표 없음</div>';return;}
 
 const vlist=Object.entries(votes).filter(([k,v])=>!v.deleted).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-let html=’<div style="padding:14px 0 60px">’;
+let html='<div style="padding:14px 0 60px">';
 
 vlist.forEach(([vid,v])=>{
-const gColor=groups[v.groupId]?.color||’#FF7F6E’;
-const gName=groups[v.groupId]?.name||’’;
+const gColor=groups[v.groupId]?.color||'#FF7F6E';
+const gName=groups[v.groupId]?.name||'';
 const totalM=mems?Object.keys(mems).length:0;
 const voted=v.responses?Object.keys(v.responses).length:0;
 const vLinks=links?.[vid]?Object.values(links[vid]):[];
@@ -1790,51 +1789,51 @@ html+=`</div>`;
 
 // 투표 결과
 if(v.responses&&Object.keys(v.responses).length>0){
-const totalR=Object.values(v.responses).length;
-html+=`<div style="padding:0 14px 10px">`;
-(v.options||[]).forEach((opt,i)=>{
-const cnt=Object.values(v.responses).filter(r=>r===i).length;
-const pct=totalR>0?Math.round(cnt/totalR*100):0;
-html+=`<div style="margin-bottom:4px">`;
-html+=`<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${escH(opt)}</span><span style="font-weight:700">${cnt}명 (${pct}%)</span></div>`;
-html+=`<div style="height:6px;background:var(--surface2);border-radius:3px"><div style="height:100%;background:${gColor};border-radius:3px;width:${pct}%"></div></div>`;
-html+=`</div>`;
-});
-html+=`</div>`;
+  const totalR=Object.values(v.responses).length;
+  html+=`<div style="padding:0 14px 10px">`;
+  (v.options||[]).forEach((opt,i)=>{
+    const cnt=Object.values(v.responses).filter(r=>r===i).length;
+    const pct=totalR>0?Math.round(cnt/totalR*100):0;
+    html+=`<div style="margin-bottom:4px">`;
+    html+=`<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>${escH(opt)}</span><span style="font-weight:700">${cnt}명 (${pct}%)</span></div>`;
+    html+=`<div style="height:6px;background:var(--surface2);border-radius:3px"><div style="height:100%;background:${gColor};border-radius:3px;width:${pct}%"></div></div>`;
+    html+=`</div>`;
+  });
+  html+=`</div>`;
 }
 
 // 링크 제출자
 if(vLinks.length>0){
-html+=`<div style="padding:6px 14px 10px;border-top:1px solid var(--border)">`;
-html+=`<div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px">📎 링크 제출 (${vLinks.length}건)</div>`;
-vLinks.forEach((l,idx)=>{
-html+=`<div style="display:flex;gap:6px;align-items:center;padding:3px 0">`;
-html+=`<span style="font-size:12px;font-weight:700;color:var(--text2)">${idx+1}. ${escH(l.nick||'')}</span>`;
-html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:var(--blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escH(l.url)}</a>`;
-html+=`</div>`;
-});
-html+=`</div>`;
+  html+=`<div style="padding:6px 14px 10px;border-top:1px solid var(--border)">`;
+  html+=`<div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px">📎 링크 제출 (${vLinks.length}건)</div>`;
+  vLinks.forEach((l,idx)=>{
+    html+=`<div style="display:flex;gap:6px;align-items:center;padding:3px 0">`;
+    html+=`<span style="font-size:12px;font-weight:700;color:var(--text2)">${idx+1}. ${escH(l.nick||'')}</span>`;
+    html+=`<a href="${escH(l.url)}" target="_blank" style="font-size:11px;color:var(--blue);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${escH(l.url)}</a>`;
+    html+=`</div>`;
+  });
+  html+=`</div>`;
 }
 html+=`</div>`;
 
 });
-html+=’</div>’;
+html+='</div>';
 mb.innerHTML=html;
 }
 
 // ══════════════════════════════════════════════
 // ── SETTINGS ──
 // ══════════════════════════════════════════════
-const GC=[’#FF7F6E’,’#FFB347’,’#5DB88A’,’#5B9BD5’,’#A78BFA’,’#F472B6’,’#34D399’,’#FB923C’];
+const GC=['#FF7F6E','#FFB347','#5DB88A','#5B9BD5','#A78BFA','#F472B6','#34D399','#FB923C'];
 
 async function loadSettings(){
-const mb=document.getElementById(‘mainBody’);
-mb.innerHTML=’<div class="loading"><div class="spinner"></div></div>’;
-const [mems,grps,votesList]=await Promise.all([dbGet(‘members’),dbGet(‘groups’),dbGet(‘votes’)]);
+const mb=document.getElementById('mainBody');
+mb.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+const [mems,grps,votesList]=await Promise.all([dbGet('members'),dbGet('groups'),dbGet('votes')]);
 members=mems||{};
 if(grps)groups=grps;
 
-let html=’<div style="padding-bottom:60px">’;
+let html='<div style="padding-bottom:60px">';
 
 // ── 부서 관리 ──
 html+=`<div class="setting-section">`;
@@ -1891,7 +1890,7 @@ html+=`<button class="btn-sm pri" onclick="openVoteModal()" style="width:100%;ma
 if(votesList){
 const vlist=Object.entries(votesList).filter(([k,v])=>!v.deleted).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0)).slice(0,10);
 vlist.forEach(([vid,v])=>{
-const gColor=groups[v.groupId]?.color||’#FF7F6E’;
+const gColor=groups[v.groupId]?.color||'#FF7F6E';
 const isClosed=v.closed||new Date(v.deadline)<=new Date();
 html+=`<div class="setting-row">`;
 html+=`<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escH(v.title)}</div>`;
@@ -1910,46 +1909,46 @@ mb.innerHTML=html;
 }
 
 async function addMember(){
-const name=document.getElementById(‘newMemberName’).value.trim();
-const groupId=document.getElementById(‘newMemberGroup’).value;
-if(!name){showToast(‘이름을 입력하세요’);return;}
-if(Object.values(members).some(m=>m.name===name)){showToast(‘이미 있는 이름입니다’);return;}
-await dbPush(‘members’,{name,groupId:groupId||null});
-document.getElementById(‘newMemberName’).value=’’;
+const name=document.getElementById('newMemberName').value.trim();
+const groupId=document.getElementById('newMemberGroup').value;
+if(!name){showToast('이름을 입력하세요');return;}
+if(Object.values(members).some(m=>m.name===name)){showToast('이미 있는 이름입니다');return;}
+await dbPush('members',{name,groupId:groupId||null});
+document.getElementById('newMemberName').value='';
 showToast(`✅ ${name} 추가됨`);await loadGroups();loadSettings();
 }
-async function delMember(k){if(!confirm(‘삭제?’))return;await dbDel(`members/${k}`);showToast(‘🗑️ 삭제됨’);loadSettings();}
+async function delMember(k){if(!confirm('삭제?'))return;await dbDel(`members/${k}`);showToast('🗑️ 삭제됨');loadSettings();}
 async function editMemberGroup(k,name){
 const gid=prompt(`${name}의 부서를 입력 (${Object.entries(groups).map(([id,g])=>g.name).join('/')}):`);
 if(!gid)return;
 const entry=Object.entries(groups).find(([id,g])=>g.name===gid);
-if(!entry){showToast(‘없는 부서명입니다’);return;}
+if(!entry){showToast('없는 부서명입니다');return;}
 await dbSet(`members/${k}/groupId`,entry[0]);
-showToast(‘✅ 부서 변경됨’);loadSettings();loadMembersPage&&loadMembersPage();
+showToast('✅ 부서 변경됨');loadSettings();loadMembersPage&&loadMembersPage();
 }
 async function addGroup(){
-const name=document.getElementById(‘newGroupName’).value.trim();
-if(!name){showToast(‘부서 이름을 입력하세요’);return;}
+const name=document.getElementById('newGroupName').value.trim();
+if(!name){showToast('부서 이름을 입력하세요');return;}
 const color=GC[Object.keys(groups).length%GC.length];
-await dbPush(‘groups’,{name,color});
-document.getElementById(‘newGroupName’).value=’’;
+await dbPush('groups',{name,color});
+document.getElementById('newGroupName').value='';
 await loadGroups();loadSettings();showToast(`✅ ${name} 추가됨`);
 }
-async function delGroup(id){if(!confirm(‘삭제?’))return;await dbDel(`groups/${id}`);await loadGroups();loadSettings();showToast(‘🗑️ 삭제됨’);}
+async function delGroup(id){if(!confirm('삭제?'))return;await dbDel(`groups/${id}`);await loadGroups();loadSettings();showToast('🗑️ 삭제됨');}
 async function editGroupPrompt(id,currentName){
-const newName=prompt(‘부서 이름 수정’,currentName);
+const newName=prompt('부서 이름 수정',currentName);
 if(!newName||newName===currentName)return;
 await dbSet(`groups/${id}/name`,newName);
-await loadGroups();loadSettings();showToast(‘✅ 수정됨’);
+await loadGroups();loadSettings();showToast('✅ 수정됨');
 }
 
 // getBadge helper
 function getBadge(opt){
-if(!opt)return’’;
-if(opt.includes(‘연차’))return’🏖️’;
-if(opt.includes(‘출근’))return’🏢’;
-if(opt.includes(‘재택’))return’🏠’;
-return’’;
+if(!opt)return'';
+if(opt.includes('연차'))return'🏖️';
+if(opt.includes('출근'))return'🏢';
+if(opt.includes('재택'))return'🏠';
+return'';
 }
 </script>
 
