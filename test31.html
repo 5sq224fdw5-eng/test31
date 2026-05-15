@@ -1846,7 +1846,7 @@ Object.entries(groups).forEach(([id,g])=>{
 html+=`<div class="setting-row">`;
 html+=`<div style="display:flex;align-items:center;gap:8px">`;
 html+=`<div style="width:12px;height:12px;border-radius:50%;background:${g.color||'#FF7F6E'}"></div>`;
-html+=`<span style="font-size:14px;font-weight:700">${escH(g.name)}</span>`;
+html+=`<span style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">${escH(g.name)}</span>`;
 if(g.lock)html+=`<span style="font-size:11px;color:var(--text3)">🔒 잠금</span>`;
 html+=`</div>`;
 html+=`<div style="display:flex;gap:6px">`;
@@ -1863,8 +1863,8 @@ html+=`</div>`;
 // ── 사원 관리 ──
 html+=`<div class="setting-section">`;
 html+=`<div class="setting-section-title">👥 사원 관리</div>`;
-html+=`<div style="display:flex;gap:8px;margin-bottom:10px">`;
-html+=`<input class="fi" id="newMemberName" placeholder="사원 이름" style="flex:1">`;
+html+=`<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">`;
+html+=`<input class="fi" id="newMemberName" placeholder="사원 이름" style="flex:1;min-width:100px">`;
 html+=`<select class="fi" id="newMemberGroup" style="flex:1">${Object.entries(groups).map(([id,g])=>`<option value="${id}">${escH(g.name)}</option>`).join('')}<option value="">미배정</option></select>`;
 html+=`<button class="btn-sm pri" onclick="addMember()">추가</button>`;
 html+=`</div>`;
